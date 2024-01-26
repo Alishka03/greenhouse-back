@@ -9,4 +9,7 @@
     <changeSet author="Alisher" id="1">
         <sqlFile path="classpath:/db/sql/08.01.2024_create_table_users.sql" relativeToChangelogFile="false" splitStatements="true"/>
     </changeSet>
+    <changeSet author="Alisher" id="2">
+        <sqlFile path="classpath:/db/sql/26.01.2024_create_users_hashs.sql" relativeToChangelogFile="false" splitStatements="true"/>
+    </changeSet>
 </databaseChangeLog>

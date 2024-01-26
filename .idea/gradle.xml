@@ -10,6 +10,7 @@
             <option value="$PROJECT_DIR$/gateway" />
           </set>
         </option>
+        <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
     </option>
   </component>

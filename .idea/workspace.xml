@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="51366139-b431-46f1-aabd-cf0a28109da6" name="Changes" comment="first commit and push" />
+    <list default="true" id="51366139-b431-46f1-aabd-cf0a28109da6" name="Changes" comment="first commit and push">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ab1a462d-649c-4450-a44c-86facc475452.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ab1a462d-649c-4450-a44c-86facc475452.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/kz/iitu/auth/config/AuthConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/kz/iitu/auth/config/AuthConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/kz/iitu/auth/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/kz/iitu/auth/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/kz/iitu/auth/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/kz/iitu/auth/service/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smart-greenhouse/src/main/resources/db/changeLog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/smart-greenhouse/src/main/resources/db/changeLog.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,6 +47,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -68,22 +79,32 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "jdk.selected.JAVA_MODULE": "corretto-17",
-    "last_opened_file_path": "C:/Users/Admin/Desktop/GreenHouse BACK",
+    "last_opened_file_path": "C:/Users/Admin/Desktop/Java,Spring boot(Проекты анау-мынау)/SPRING_SCHOOL_PROJECT/schoolsystem",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
-    "spring.configuration.checksum": "2e7f682ad56cda6fd8c27e2993118c97",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "spring.configuration.checksum": "e5a76c523edb22304b8685436d3cf428",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
+    "ChangesTree.GroupingKeys": [
+      "directory",
+      "module"
+    ],
     "DatabaseDriversLRU": [
       "postgresql"
     ]
   }
 }]]></component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Admin\Desktop\GreenHouse BACK\smartgreenhouse" />
@@ -190,6 +211,9 @@
       <workItem from="1706261453939" duration="66000" />
       <workItem from="1706261660763" duration="1463000" />
       <workItem from="1706263202704" duration="2305000" />
+      <workItem from="1706266946602" duration="968000" />
+      <workItem from="1706267927833" duration="479000" />
+      <workItem from="1706268418044" duration="4607000" />
     </task>
     <task id="LOCAL-00001" summary="first commit and push">
       <created>1706265176646</created>
@@ -218,5 +242,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit and push" />
     <option name="LAST_COMMIT_MESSAGE" value="first commit and push" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
