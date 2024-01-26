@@ -49,4 +49,16 @@ public class AuthController {
         service.validateToken(token);
         return "Token is valid";
     }
+
+    @GetMapping("/reset-password/{email}")
+    public ResponseEntity<?> getCodeViaEmail(@PathVariable String email) {
+        return ResponseEntity.ok(service.getCodeViaEmail(email));
+    }
+
+    @PostMapping("/change-password/{email}")
+    public ResponseEntity<?> changePassword(@PathVariable String email,
+                                            @RequestParam("password") String password,
+                                            @RequestParam("code") Long code){
+        return ResponseEntity.ok(service.changePassword(email, password, code));
+    }
 }

@@ -18,6 +18,24 @@ spring:
             format_sql: true
         database: postgresql
         database-platform: org.hibernate.dialect.PostgreSQLDialect
+  #Mail sender
+  mail:
+    host: post.mail.kz
+    username: nobd@edu.kz
+    password: qaz123WSX#!
+    port: 587
+    from: nobd@edu.kz
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: false
+          ssl:
+            enable: false
+            trust: "*"
+        debug: true
 
 eureka:
   client:
