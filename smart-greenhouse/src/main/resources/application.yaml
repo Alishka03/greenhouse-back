@@ -1,0 +1,29 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: smart-greenhouse-service
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: alisher2003
+    url: jdbc:postgresql://localhost:5432/greenhouse
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        show_sql: true
+  liquibase:
+    change-log: db/changeLog.xml
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+jwt:
+   secret: SECRET
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8767/eureka/
