@@ -1,0 +1,20 @@
+server:
+  port: 8890
+  servlet:
+    context-path: /file-storage
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://alisheraytbay:alisheraytbay@cluster0.a4fkt4u.mongodb.net/?retryWrites=true&w=majority
+      database: greenhouse
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 500MB
+      max-request-size: 500MB
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8767/eureka/
