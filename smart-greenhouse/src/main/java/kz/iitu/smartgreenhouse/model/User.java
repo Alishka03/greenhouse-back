@@ -1,4 +1,4 @@
-package kz.iitu.model;
+package kz.iitu.smartgreenhouse.model;
 
 import jakarta.persistence.*;
 import lombok.*;

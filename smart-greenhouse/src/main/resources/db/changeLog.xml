@@ -12,4 +12,19 @@
     <changeSet author="Alisher" id="2">
         <sqlFile path="classpath:/db/sql/26.01.2024_create_users_hashs.sql" relativeToChangelogFile="false" splitStatements="true"/>
     </changeSet>
+    <changeSet author="Alisher" id="3">
+        <sqlFile path="classpath:/db/sql/30.01.2024_create_breakpoints_table.sql" relativeToChangelogFile="false" splitStatements="true"/>
+    </changeSet>
+    <changeSet author="Alisher" id="4">
+        <sqlFile path="classpath:/db/sql/30.01.2024_create_plants_table.sql" relativeToChangelogFile="false" splitStatements="true"/>
+    </changeSet>
+    <changeSet author="Alisher" id="5">
+        <sqlFile path="classpath:/db/sql/31.01.2024_create_arduinos_table.sql" relativeToChangelogFile="false" splitStatements="true"/>
+    </changeSet>
+    <changeSet author="Alisher" id="6">
+        <sqlFile path="classpath:/db/sql/31.01.2024_alter_table_plants_rename_fields.sql" relativeToChangelogFile="false" splitStatements="true"/>
+    </changeSet>
+    <changeSet author="Alisher" id="7">
+        <sqlFile path="classpath:/db/sql/31.01.2024_create_greenhouses_table.sql" relativeToChangelogFile="false" splitStatements="true"/>
+    </changeSet>
 </databaseChangeLog>
