@@ -3,6 +3,8 @@ server:
   servlet:
     context-path: /file-storage
 spring:
+  application:
+    name: file-storage
   data:
     mongodb:
       uri: mongodb+srv://alisheraytbay:alisheraytbay@cluster0.a4fkt4u.mongodb.net/?retryWrites=true&w=majority
