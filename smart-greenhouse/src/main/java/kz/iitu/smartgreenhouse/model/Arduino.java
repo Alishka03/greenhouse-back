@@ -4,25 +4,25 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "breakpoints")
+@Table(name = "arduinos")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class BreakPoint {
+public class Arduino {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "const_temperature")
     private Float temperature;
 
-    @Column(name = "const_humidity")
     private Float humidity;
 
-    @Column(name = "const_carbon_dioxide")
+    @Column(name = "carbon_dioxide")
     private Float carbonDioxide;
 
-    // Getters and setters
+    @ManyToOne
+    @JoinColumn(name = "plant_id")
+    private Plant plant;
 }

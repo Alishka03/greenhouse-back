@@ -2,8 +2,12 @@ package kz.iitu.smartgreenhouse.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -34,4 +38,7 @@ public class User {
 
     @Column(name = "profile_picture")
     private String picture;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner")
+    private List<Greenhouse> greenhouses;
 }
