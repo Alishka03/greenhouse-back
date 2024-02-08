@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
+import org.thymeleaf.context.Context;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -61,7 +61,12 @@ public class AuthService {
             resetPasswordEntity.setHashCode(random4DigitLong);
             passwordEntityRepository.save(resetPasswordEntity);
         }
-        mailSender.sendMail(email,"CODE TO RESET PASSWORD","This is your code to reset password : " + random4DigitLong);
+        mailSender.sendMail(email,"GreenHouse App Team","" +
+                "                           Hello!\n" +
+                "Did you forget the password? This is your code to reset password : " + random4DigitLong);
+        Context context = new Context();
+        context.setVariable("message","some message");
+//        mailSender.sendEmailWithHttpTemplate(email,"GREENHOUSE-RESET-PASSWORD","email-template",context);
         return new RequestResponseDto("Reset code has sent succesfully", LocalDateTime.now());
     }
 
