@@ -1,7 +1,7 @@
 server:
   port: 8890
   servlet:
-    context-path: /file-storage
+    context-path: /file-store
 spring:
   application:
     name: file-storage
