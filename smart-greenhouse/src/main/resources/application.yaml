@@ -1,8 +1,10 @@
 server:
   port: 8082
+  servlet:
+    context-path: /smart-greenhouse
 spring:
   application:
-    name: smart-greenhouse-service
+    name: smart-greenhouse
   datasource:
     driver-class-name: org.postgresql.Driver
     username: postgres
