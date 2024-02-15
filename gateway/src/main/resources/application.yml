@@ -1,11 +1,15 @@
 server:
   port: 8090
-  servlet:
-    context-path: /greenhouse-gateway
-
 spring:
+  main:
+    web-application-type: reactive
   application:
     name: gateway-service
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: alisher2003
+    url: jdbc:postgresql://localhost:5432/greenhouse
   cloud:
     gateway:
       routes:
@@ -15,12 +19,21 @@ spring:
             - Path=/gateway/auth/**
           filters:
             - StripPrefix=1
-        - id: smart-greenhouse-service
-          uri: http://localhost:8080
+        - id: smart-greenhouse
+          uri: http://localhost:8082
           predicates:
             - Path=/gateway/smart-greenhouse/**
           filters:
+            - AuthenticationFilter
             - StripPrefix=1
+        - id: file-store
+          uri: http://localhost:8890
+          predicates:
+            - Path=/gateway/file-store/**
+          filters:
+            - AuthenticationFilter
+            - StripPrefix=1
+
 eureka:
   client:
     service-url:
