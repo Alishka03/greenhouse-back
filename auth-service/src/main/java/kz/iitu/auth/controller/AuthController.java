@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/auth")
-public class AuthController {
+public class AuthController extends BaseController{
 
     private final AuthService service;
     private final AuthenticationManager authenticationManager;
@@ -26,11 +26,6 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> addNewUser(@RequestBody UserCredential user) throws Exception {
         AuthResponse auth = service.saveUser(user);
-        if(auth==null){
-            return ResponseEntity.
-                    status(HttpStatus.BAD_REQUEST).
-                    body(new RequestResponseDto("User exists by email:" + user.getEmail(), LocalDateTime.now()));
-        }
         return ResponseEntity.ok(auth);
     }
 

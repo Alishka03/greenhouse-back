@@ -4,6 +4,8 @@ import kz.iitu.auth.dto.AuthResponse;
 import kz.iitu.auth.dto.RequestResponseDto;
 import kz.iitu.auth.entity.ResetPasswordEntity;
 import kz.iitu.auth.entity.UserCredential;
+import kz.iitu.auth.errors.BadRequestError;
+import kz.iitu.auth.errors.ForbiddenError;
 import kz.iitu.auth.repository.ResetPasswordEntityRepository;
 import kz.iitu.auth.repository.UserCredentialRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +32,7 @@ public class AuthService {
         credential.setPassword(passwordEncoder.encode(credential.getPassword()));
         Optional<UserCredential> user = repository.findByEmail(credential.getEmail());
         if (user.isPresent()) {
-            return null;
+            throw new ForbiddenError("User exists with email : "+credential.getEmail());
         }
         repository.save(credential);
         return AuthResponse.builder()
@@ -49,7 +51,7 @@ public class AuthService {
     public RequestResponseDto getCodeViaEmail(String email){
         Optional<UserCredential> user = repository.findByEmail(email);
         if (user.isEmpty()) {
-            return new RequestResponseDto("User not found with this email : " + email, LocalDateTime.now());
+            throw  new BadRequestError("User not found with this email : " + email);
         }
         Long random4DigitLong = ThreadLocalRandom.current().nextLong(1000, 10000);
         Optional<ResetPasswordEntity> resetPassword = passwordEntityRepository.findById(user.get().getId());
@@ -73,16 +75,18 @@ public class AuthService {
     public RequestResponseDto changePassword(String email , String password , Long code){
         Optional<UserCredential> user = repository.findByEmail(email);
         if (user.isEmpty()) {
-            return new RequestResponseDto("User not found with this email : " + email, LocalDateTime.now());
+            throw  new BadRequestError("User not found with this email : " + email);
         }
         UserCredential userToSave = user.get();
         Optional<ResetPasswordEntity> passwordEntity = passwordEntityRepository.findById(userToSave.getId());
         if(passwordEntity.isEmpty()){
-            return new RequestResponseDto("HashCode not found for user : " + email, LocalDateTime.now());
+            throw  new BadRequestError("HashCode not found for user : " + email);
         }else{
             if(Objects.equals(code, passwordEntity.get().getHashCode())){
                 System.out.println("EQUALS");
                 userToSave.setPassword(passwordEncoder.encode(password));
+            }else {
+                throw  new BadRequestError("HashCode is incorrect : " + email);
             }
         }
         repository.save(userToSave);
