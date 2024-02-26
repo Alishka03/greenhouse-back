@@ -8,7 +8,7 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     username: postgres
-    password: alisher2003
+    password: postgres
     url: jdbc:postgresql://localhost:5432/greenhouse
   jpa:
     show-sql: true
