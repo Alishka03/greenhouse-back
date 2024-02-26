@@ -12,12 +12,13 @@
       <list>
         <option value="$PROJECT_DIR$/eureka/pom.xml" />
         <option value="$PROJECT_DIR$/eureka-server/pom.xml" />
-        <option value="$PROJECT_DIR$/gateway/pom.xml" />
         <option value="$PROJECT_DIR$/greenhouse/pom.xml" />
         <option value="$PROJECT_DIR$/auth-service/pom.xml" />
         <option value="$PROJECT_DIR$/greenhouse/greenhouse/pom.xml" />
         <option value="$PROJECT_DIR$/smart-greenhouse/smart-greenhouse/pom.xml" />
         <option value="$PROJECT_DIR$/smart-greenhouse/pom.xml" />
+        <option value="$PROJECT_DIR$/file-store/pom.xml" />
+        <option value="$PROJECT_DIR$/greenhouse-gateway/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

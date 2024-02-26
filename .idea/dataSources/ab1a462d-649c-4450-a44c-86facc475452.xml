@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="greenhosue@localhost">
-  <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.48">
+  <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.51">
     <root id="1">
       <DateStyle>dmy</DateStyle>
       <Grants>1||-9223372036854775808|c|G
@@ -4334,7 +4334,7 @@ false Zulu
     <sequence id="285" parent="284" name="users_hashs_hash_code_seq">
       <DasType>bigint|0s</DasType>
       <ObjectId>88614</ObjectId>
-      <SequenceIdentity>1(1)</SequenceIdentity>
+      <SequenceIdentity>1</SequenceIdentity>
       <StartValue>1</StartValue>
       <StateNumber>6127</StateNumber>
       <OwnerName>postgres</OwnerName>
@@ -4342,7 +4342,7 @@ false Zulu
     <sequence id="286" parent="284" name="users_hashs_id_seq">
       <DasType>bigint|0s</DasType>
       <ObjectId>88613</ObjectId>
-      <SequenceIdentity>1(1)</SequenceIdentity>
+      <SequenceIdentity>1</SequenceIdentity>
       <StartValue>1</StartValue>
       <StateNumber>6127</StateNumber>
       <OwnerName>postgres</OwnerName>
@@ -4350,7 +4350,7 @@ false Zulu
     <sequence id="287" parent="284" name="users_id_seq">
       <DasType>bigint|0s</DasType>
       <ObjectId>88605</ObjectId>
-      <SequenceIdentity>1(10)</SequenceIdentity>
+      <SequenceIdentity>1</SequenceIdentity>
       <StartValue>1</StartValue>
       <StateNumber>6096</StateNumber>
       <OwnerName>postgres</OwnerName>

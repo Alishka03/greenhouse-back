@@ -5,15 +5,46 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51366139-b431-46f1-aabd-cf0a28109da6" name="Changes" comment="first commit and push">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/kz/iitu/auth/errors/ApiErrors.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/kz/iitu/auth/errors/ApiException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/kz/iitu/auth/errors/UnauthorizedError.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/greenhouse-gateway/src/main/java/kz/diploma/greenhousegateway/config/AppConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/greenhouse-gateway/src/main/java/kz/diploma/greenhousegateway/filter/AuthenticationFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/greenhouse-gateway/src/main/java/kz/diploma/greenhousegateway/filter/RouteValidator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/greenhouse-gateway/src/main/java/kz/diploma/greenhousegateway/util/JwtUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-greenhouse/src/main/java/kz/iitu/smartgreenhouse/web/rest/errors/ApiErrors.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-greenhouse/src/main/java/kz/iitu/smartgreenhouse/web/rest/errors/ApiException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-greenhouse/src/main/java/kz/iitu/smartgreenhouse/web/rest/errors/BadRequestError.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-greenhouse/src/main/java/kz/iitu/smartgreenhouse/web/rest/errors/ErrorDtoException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-greenhouse/src/main/java/kz/iitu/smartgreenhouse/web/rest/errors/ForbiddenError.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-greenhouse/src/main/java/kz/iitu/smartgreenhouse/web/rest/errors/UnauthorizedError.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4f9271e1-0a5f-48e9-9fe3-63a7b72af3bd.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/ab1a462d-649c-4450-a44c-86facc475452.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ab1a462d-649c-4450-a44c-86facc475452.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/kz/iitu/auth/config/AuthConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/kz/iitu/auth/config/AuthConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/kz/iitu/auth/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/kz/iitu/auth/controller/AuthController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/kz/iitu/auth/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/kz/iitu/auth/service/AuthService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smart-greenhouse/src/main/resources/db/changeLog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/smart-greenhouse/src/main/resources/db/changeLog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-store/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/file-store/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/kz/diploma/gateway/GatewayServiceApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/kz/diploma/gateway/config/AppConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/kz/diploma/gateway/filter/AuthenticationFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/kz/diploma/gateway/filter/RouteValidator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/kz/diploma/gateway/util/JwtUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/test/java/kz/diploma/gateway/GatewayServiceApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/smart-greenhouse/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/smart-greenhouse/src/main/resources/application.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,8 +77,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -60,10 +91,13 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="useMavenConfig" value="true" />
+        <option name="mavenHome" value="Use Maven wrapper" />
       </MavenGeneralSettings>
     </option>
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4
+}]]></component>
   <component name="ProjectId" id="2afUcV8FhM0IFSLubctNkvqIu0v" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -72,14 +106,23 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Maven.file-store [clean,install].executor": "Run",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
     "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.AuthServiceApplication (1).executor": "Run",
+    "Spring Boot.EurekaApplication.executor": "Run",
+    "Spring Boot.FileStoreApplication.executor": "Run",
+    "Spring Boot.GreenhouseGatewayApplication.executor": "Run",
+    "Spring Boot.SmartGreenhouseApplication.executor": "Run",
     "WebServerToolWindowFactoryState": "false",
     "jdk.selected.JAVA_MODULE": "corretto-17",
-    "last_opened_file_path": "C:/Users/Admin/Desktop/Java,Spring boot(Проекты анау-мынау)/SPRING_SCHOOL_PROJECT/schoolsystem",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/User/Desktop/greenhouse-back/smart-greenhouse/src/main/java/kz/iitu/smartgreenhouse/web/rest",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -88,6 +131,7 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
+    "run.configurations.included.in.services": "true",
     "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
     "spring.configuration.checksum": "e5a76c523edb22304b8685436d3cf428",
     "vue.rearranger.settings.migration": "true"
@@ -107,18 +151,26 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\User\Desktop\greenhouse-back\smart-greenhouse\src\main\java\kz\iitu\smartgreenhouse\web\rest" />
+      <recent name="C:\Users\User\Desktop\greenhouse-back\auth-service\src\main\java\kz\iitu\auth\errors" />
+      <recent name="C:\Users\User\Desktop\greenhouse-back\greenhouse-gateway\src\main\java\kz\diploma\greenhousegateway" />
       <recent name="C:\Users\Admin\Desktop\GreenHouse BACK\smartgreenhouse" />
       <recent name="C:\Users\Admin\Desktop\diploma project back\test\smart-greenhouse\src\main\java\kz\iitu" />
-      <recent name="C:\Users\Admin\Desktop\diploma project back\test\smart-greenhouse\src\main\resources" />
-      <recent name="C:\Users\Admin\Desktop\diploma project back\test" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Admin\Desktop\diploma project back\test" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="kz.iitu.smartgreenhouse.controllers" />
+      <recent name="kz.iitu.auth.errors" />
+      <recent name="kz.iitu.auth.dto" />
     </key>
   </component>
   <component name="RunDashboard">
     <option name="configurationTypes">
       <set>
+        <option value="MicronautRunConfigurationType" />
+        <option value="QuarkusRunConfigurationType" />
         <option value="SpringBootApplicationConfigurationType" />
       </set>
     </option>
@@ -158,6 +210,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="FileStoreApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="file-store" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="kz.iitu.filestore.FileStoreApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="GatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="gateway" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="kz.iitu.gateway.GatewayApplication" />
@@ -185,6 +244,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="GreenhouseGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="greenhouse-gateway" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="kz.diploma.greenhousegateway.GreenhouseGatewayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SmartGreenhouseApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="smart-greenhouse" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="kz.iitu.smartgreenhouse.SmartGreenhouseApplication" />
@@ -197,6 +263,14 @@
         <item itemvalue="Spring Boot.GatewayApplication" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-11.0.22-corretto-11.0.22-4caba194b151-868cef46" />
+        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-5cd809f4" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -214,6 +288,7 @@
       <workItem from="1706266946602" duration="968000" />
       <workItem from="1706267927833" duration="479000" />
       <workItem from="1706268418044" duration="4607000" />
+      <workItem from="1708942724212" duration="4917000" />
     </task>
     <task id="LOCAL-00001" summary="first commit and push">
       <created>1706265176646</created>

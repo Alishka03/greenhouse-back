@@ -1,4 +1,4 @@
-package kz.diploma.gateway.config;
+package kz.diploma.greenhousegateway.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

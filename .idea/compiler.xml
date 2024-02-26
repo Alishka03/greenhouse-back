@@ -7,14 +7,26 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="greenhouse-gateway" />
         <module name="auth-service" />
-        <module name="smart-greenhouse" />
+        <module name="file-store" />
         <module name="eureka" />
-        <module name="gateway" />
+      </profile>
+      <profile name="Annotation profile for smart-greenhouse" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.4.2.Final/mapstruct-processor-1.4.2.Final.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.4.2.Final/mapstruct-1.4.2.Final.jar" />
+        </processorPath>
+        <module name="smart-greenhouse" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="eureka-server" target="1.7" />
+      <module name="gateway" target="17" />
       <module name="greenhouse" target="17" />
     </bytecodeTargetLevel>
   </component>
@@ -22,9 +34,11 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="auth-service" options="-parameters" />
       <module name="eureka" options="-parameters" />
+      <module name="file-store" options="-parameters" />
       <module name="gateway" options="-parameters" />
       <module name="greenhouse" options="-parameters" />
-      <module name="smart-greenhouse" options="-parameters" />
+      <module name="greenhouse-gateway" options="-parameters" />
+      <module name="smart-greenhouse" options="-parameters -Amapstruct.defaultComponentModel=spring" />
     </option>
   </component>
 </project>
