@@ -20,10 +20,20 @@ public class Plant {
 
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "breakpoint_id")
-    private BreakPoint breakpoint;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
+    @Column(name = "const_temperature")
+    private Float temperature;
+
+    @Column(name = "const_humidity")
+    private Float humidity;
+
+    @Column(name = "const_carbon_dioxide")
+    private Float carbonDioxide;
+
+    //TODO:IMAGE ->
     // Getters and setters
 
 }

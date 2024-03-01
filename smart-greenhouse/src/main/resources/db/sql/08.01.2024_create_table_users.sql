@@ -9,3 +9,5 @@ CREATE TABLE users
     profile_picture VARCHAR(255),
     CONSTRAINT pk_users PRIMARY KEY (id)
 );
+insert into users (first_name, last_name, email, password, date_of_birth, profile_picture) values
+('admin','admin','admin','$2a$10$DeBQKi0/OBbxynOlX3CdquTrk1n0VmY0oqpn6SVY47CtLiYntxCMq','2022-01-02','values')
