@@ -35,5 +35,6 @@ public class UserCredential {
     @Column(name = "profile_picture")
     private String picture;
 
+
 //    private String role;
 }

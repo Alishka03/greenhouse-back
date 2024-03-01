@@ -1,5 +1,7 @@
 package kz.iitu.auth.service;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import kz.iitu.auth.dto.AuthResponse;
 import kz.iitu.auth.dto.RequestResponseDto;
 import kz.iitu.auth.entity.ResetPasswordEntity;
@@ -10,6 +12,7 @@ import kz.iitu.auth.repository.ResetPasswordEntityRepository;
 import kz.iitu.auth.repository.UserCredentialRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
@@ -27,6 +30,7 @@ public class AuthService {
     private final ResetPasswordEntityRepository passwordEntityRepository;
     private final JwtService jwtService;
     private final SMTPService mailSender;
+    public static final String SECRET = "5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437";
 
     public AuthResponse saveUser(UserCredential credential) throws Exception {
         credential.setPassword(passwordEncoder.encode(credential.getPassword()));
@@ -34,16 +38,29 @@ public class AuthService {
         if (user.isPresent()) {
             throw new ForbiddenError("User exists with email : "+credential.getEmail());
         }
-        repository.save(credential);
+        UserCredential userToSave =  repository.save(credential);
         return AuthResponse.builder()
                 .token(jwtService.generateToken(credential.getEmail()))
+                .userId(userToSave.getId())
+                .birthDate(userToSave.getDateOfBirth())
+                .lastName(userToSave.getLastname())
+                .firstName(userToSave.getFirstname())
+                .profilePicture(userToSave.getPicture())
                 .build();
 
     }
 
     public AuthResponse generateToken(String username) {
+        Optional<UserCredential> user =  repository.findByEmail(username);
+        if(user.isEmpty()){
+            throw new ForbiddenError("User not found with email : "+username);
+        }
         return AuthResponse.builder()
                 .userId(Objects.requireNonNull(repository.findByEmail(username).orElse(null)).getId())
+                .birthDate(user.get().getDateOfBirth())
+                .lastName(user.get().getLastname())
+                .firstName(user.get().getFirstname())
+                .profilePicture(user.get().getPicture())
                 .token(jwtService.generateToken(username))
                 .build();
     }
@@ -93,6 +110,16 @@ public class AuthService {
         return new RequestResponseDto("Password has changed successfully for :" + email , LocalDateTime.now());
     }
 
+
+    public  UserCredential getUserFromToken(String token) {
+        Claims claims = Jwts.parser()
+                .setSigningKey(SECRET)
+                .parseClaimsJws(token)
+                .getBody();
+
+        String username = claims.get("sub", String.class);
+        return repository.findByEmail(username).orElseThrow(()-> new BadRequestError("Bad credentials"));
+    }
 
     public void validateToken(String token) {
         jwtService.validateToken(token);

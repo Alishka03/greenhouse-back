@@ -5,6 +5,7 @@ import kz.iitu.auth.dto.AuthResponse;
 import kz.iitu.auth.dto.RequestResponseDto;
 import kz.iitu.auth.entity.UserCredential;
 import kz.iitu.auth.service.AuthService;
+import kz.iitu.auth.service.UserUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +23,16 @@ public class AuthController extends BaseController{
 
     private final AuthService service;
     private final AuthenticationManager authenticationManager;
+    private final UserUtils userUtils;
 
-    @PostMapping("/register")
+
+    @PostMapping("/sign-up")
     public ResponseEntity<?> addNewUser(@RequestBody UserCredential user) throws Exception {
         AuthResponse auth = service.saveUser(user);
         return ResponseEntity.ok(auth);
     }
 
-    @PostMapping("/token")
+    @PostMapping("/sign-in")
     public ResponseEntity<?> getToken(@RequestBody AuthRequest authRequest) {
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
         if (authenticate.isAuthenticated()) {
@@ -56,4 +59,12 @@ public class AuthController extends BaseController{
                                             @RequestParam("code") Long code){
         return ResponseEntity.ok(service.changePassword(email, password, code));
     }
+
+    @GetMapping("/get-current-user")
+    public UserCredential getCurrentUser(@RequestHeader("Authorization") String bearerToken){
+        String tokenWithoutPrefix = bearerToken.replace("Bearer ", "");
+        return service.getUserFromToken(tokenWithoutPrefix);
+    }
+
+
 }

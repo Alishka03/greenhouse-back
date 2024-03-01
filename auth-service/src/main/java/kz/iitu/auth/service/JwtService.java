@@ -1,9 +1,11 @@
 package kz.iitu.auth.service;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import kz.iitu.auth.entity.UserCredential;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
@@ -39,4 +41,6 @@ public class JwtService {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET);
         return Keys.hmacShaKeyFor(keyBytes);
     }
+
+
 }

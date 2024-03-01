@@ -17,6 +17,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class AuthConfig {
 
+
+
     @Bean
     public UserDetailsService userDetailsService(){
         return new CustomUserDetailsService();
@@ -26,7 +28,7 @@ public class AuthConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/auth/register", "/auth/token", "/auth/**").permitAll()
+                .requestMatchers("/auth/sign-in", "/auth/sign-up" , "auth/**").permitAll()
                 .and()
                 .build();
     }
