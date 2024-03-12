@@ -13,7 +13,8 @@ public class RouteValidator {
             "/auth/register",
             "/auth/**",
             "/gateway/auth/**",
-            "/eureka"
+            "/eureka",
+            "/gateway/smart-greenhouse/arduino/insert-data"
     );
 
     public Predicate<ServerHttpRequest> isSecured =

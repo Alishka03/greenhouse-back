@@ -6,4 +6,5 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface PlantMapper extends EntityMapper<PlantDto, Plant> {
+
 }

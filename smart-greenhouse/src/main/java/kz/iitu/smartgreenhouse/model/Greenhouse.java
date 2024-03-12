@@ -3,6 +3,8 @@ package kz.iitu.smartgreenhouse.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
+
 
 @Entity
 @Table(name = "greenhouses")
@@ -11,7 +13,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Greenhouse {
+public class Greenhouse implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
