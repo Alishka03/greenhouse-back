@@ -1,5 +1,6 @@
 package kz.iitu.smartgreenhouse.service;
 
+import kz.iitu.smartgreenhouse.feign.AuthServiceFeign;
 import kz.iitu.smartgreenhouse.mapper.ArduinoMapper;
 import kz.iitu.smartgreenhouse.model.Arduino;
 import kz.iitu.smartgreenhouse.model.criteria.ArduinoData;
@@ -20,9 +21,12 @@ public class ArduinoService {
 
     private final ArduinoMapper arduinoMapper;
 
-    public ArduinoService(ArduinoRepository arduinoRepository, ArduinoMapper arduinoMapper) {
+    private final AuthServiceFeign authServiceFeign;
+
+    public ArduinoService(ArduinoRepository arduinoRepository, ArduinoMapper arduinoMapper, AuthServiceFeign authServiceFeign) {
         this.arduinoRepository = arduinoRepository;
         this.arduinoMapper = arduinoMapper;
+        this.authServiceFeign = authServiceFeign;
     }
 
     public Arduino save(ArduinoDto arduinoDto) {
@@ -74,5 +78,10 @@ public class ArduinoService {
             entity.setTemperature(data.getTemperature());
         }
         return arduinoRepository.save(entity);
+    }
+
+    public void deleteArduino(Long id) {
+
+        arduinoRepository.deleteById(id);
     }
 }

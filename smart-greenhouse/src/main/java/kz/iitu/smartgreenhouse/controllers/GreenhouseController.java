@@ -30,4 +30,15 @@ public class GreenhouseController extends BaseController{
     public ResponseEntity<?> updateGreenhouse(@RequestBody GreenhouseDto dto,@RequestHeader("Authorization") String bearerToken){
         return ResponseEntity.ok(greenhouseService.updateGreenhouse(dto,bearerToken));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteGreenhouse(@PathVariable Long id , @RequestHeader("Authorization") String bearerToken){
+        greenhouseService.deleteGreenhouse(id,bearerToken);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/my")
+    public ResponseEntity<?> getMyGreenhouses( @RequestHeader("Authorization") String bearerToken){
+        return ResponseEntity.ok(greenhouseService.getMyGreenhouses(bearerToken));
+    }
 }

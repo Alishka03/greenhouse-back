@@ -25,7 +25,7 @@ public class Greenhouse implements Serializable {
     @JoinColumn(name = "owner_id")
     private User owner;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "arduino_id")
     private Arduino arduino;
 }

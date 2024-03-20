@@ -34,8 +34,4 @@ public class Plant implements Serializable {
 
     @Column(name = "const_carbon_dioxide")
     private Float carbonDioxide;
-
-    //TODO:IMAGE ->
-    // Getters and setters
-
 }

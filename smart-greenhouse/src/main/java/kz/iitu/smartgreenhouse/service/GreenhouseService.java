@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class GreenhouseService {
@@ -57,8 +58,8 @@ public class GreenhouseService {
                 .map(mapper::toDto);
     }
 
-    public PageResponse<Greenhouse> findAllPageable(GreenhouseCriteria greenhouseCriteria) {
-        PageResponse<Greenhouse> response = new PageResponse<>();
+    public PageResponse<GreenhouseDto> findAllPageable(GreenhouseCriteria greenhouseCriteria) {
+        PageResponse<GreenhouseDto> response = new PageResponse<>();
         Page<Greenhouse> greenhousePage = greenhouseRepository.findAll(
                 PageRequest.of(
                         greenhouseCriteria.getPage() > 0 ? greenhouseCriteria.getPage() - 1 : 0,
@@ -67,7 +68,7 @@ public class GreenhouseService {
         );
         response.setTotalCount(greenhousePage.getTotalElements());
         response.setTotalPages(greenhousePage.getTotalPages());
-        response.setItems(greenhousePage.getContent());
+        response.setItems(greenhousePage.getContent().stream().map(mapper::toDto).collect(Collectors.toList()));
         return response;
     }
 
@@ -83,5 +84,21 @@ public class GreenhouseService {
             throw new BadRequestError("You don't have permission to update this greenhouse");
         }
         return partialUpdate(dto);
+    }
+
+    public void deleteGreenhouse(Long id,String token){
+        User user = authServiceFeign.getCurrentUser(token);
+        List<Greenhouse> greenhouseList = greenhouseRepository.findAllByOwnerId(user.getId());
+        Greenhouse givenGreenhouse = greenhouseRepository.findById(id).orElseThrow(() -> new ObjectNotFoundError("Greenhouse not found with id: "+id));
+        if(!greenhouseList.contains(givenGreenhouse)){
+            throw new BadRequestError("You don't have permission to delete this greenhouse");
+        }
+        greenhouseRepository.deleteById(id);
+    }
+
+    public List<GreenhouseDto> getMyGreenhouses(String bearerToken) {
+        User user = authServiceFeign.getCurrentUser(bearerToken);
+        List<Greenhouse> greenhouseList = greenhouseRepository.findAllByOwnerId(user.getId());
+        return greenhouseList.stream().map(mapper::toDto).collect(Collectors.toList());
     }
 }

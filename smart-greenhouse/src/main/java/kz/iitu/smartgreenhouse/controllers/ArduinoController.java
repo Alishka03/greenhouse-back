@@ -51,4 +51,10 @@ public class ArduinoController extends BaseController {
         return new ResponseEntity<>(arduinoService.insertData(data),HttpStatus.OK);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteArduino(@PathVariable Long id){
+        arduinoService.deleteArduino(id);
+        return ResponseEntity.ok().build();
+    }
+
 }
