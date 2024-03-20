@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="greenhosue@localhost" uuid="ab1a462d-649c-4450-a44c-86facc475452">
+    <data-source source="LOCAL" name="greenhouse@localhost" uuid="14ef8f81-f683-4813-8fda-dc4003705ffa">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/greenhouse</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="greenhouse@localhost" uuid="7804440f-9cd6-4766-bd77-6d1608f1850c">
-      <driver-ref>postgresql</driver-ref>
-      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/smart-greenhouse/src/main/resources/application.yaml</remarks>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/greenhouse</jdbc-url>
       <jdbc-additional-properties>

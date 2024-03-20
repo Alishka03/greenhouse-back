@@ -2,16 +2,9 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/auth-service/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/auth-service/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/eureka-server/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/eureka-server/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/eureka/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/eureka/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/file-store/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/greenhouse-gateway/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/greenhouse/greenhouse/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/greenhouse/greenhouse/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/smart-greenhouse/smart-greenhouse/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/smart-greenhouse/src/main/java" charset="UTF-8" />
   </component>
 </project>

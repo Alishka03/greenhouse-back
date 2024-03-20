@@ -2,19 +2,16 @@ package kz.iitu.auth.controller;
 
 import kz.iitu.auth.dto.AuthRequest;
 import kz.iitu.auth.dto.AuthResponse;
-import kz.iitu.auth.dto.RequestResponseDto;
+import kz.iitu.auth.dto.ProfileInfoDto;
 import kz.iitu.auth.entity.UserCredential;
 import kz.iitu.auth.service.AuthService;
 import kz.iitu.auth.service.UserUtils;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDateTime;
 
 @RestController
 @RequiredArgsConstructor
@@ -66,5 +63,16 @@ public class AuthController extends BaseController{
         return service.getUserFromToken(tokenWithoutPrefix);
     }
 
+    @PutMapping("/update-profile-image")
+    public UserCredential updateImage(@RequestBody String imageUrl,@RequestHeader("Authorization") String bearerToken){
+        String tokenWithoutPrefix = bearerToken.replace("Bearer ", "");
+        return service.updateProfileImage(imageUrl,tokenWithoutPrefix);
+    }
+
+    @PutMapping("/update-profile-info")
+    public UserCredential updateProfileInfo(@RequestBody ProfileInfoDto infoDto, @RequestHeader("Authorization") String bearerToken){
+        String tokenWithoutPrefix = bearerToken.replace("Bearer ", "");
+        return service.updateProfileInfo(infoDto,tokenWithoutPrefix);
+    }
 
 }

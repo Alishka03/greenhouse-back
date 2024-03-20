@@ -29,9 +29,6 @@ public class UserCredential {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "date_of_birth")
-    private LocalDate dateOfBirth;
-
     @Column(name = "profile_picture")
     private String picture;
 
