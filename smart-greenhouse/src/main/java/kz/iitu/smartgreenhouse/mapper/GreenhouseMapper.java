@@ -8,12 +8,12 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
-@Mapper(componentModel = "spring",uses = {ArduinoMapper.class})
+@Mapper(componentModel = "spring",uses = {ArduinoMapper.class,PlantMapper.class})
 public interface GreenhouseMapper extends EntityMapper<GreenhouseDto, Greenhouse> {
     @Mapping(target = "id" ,source = "id")
     @Mapping(target = "owner" ,source = "owner",qualifiedByName = "userId")
     @Mapping(target = "name" ,source = "name")
-    @Mapping(target = "arduino" ,source = "arduino")
+    @Mapping(target = "arduino" ,source = "arduino",qualifiedByName = "base")
     GreenhouseDto toDto(Greenhouse greenhouse);
 
 
@@ -24,7 +24,6 @@ public interface GreenhouseMapper extends EntityMapper<GreenhouseDto, Greenhouse
     @Mapping(target = "lastname" , source ="lastname")
     @Mapping(target = "email" , source ="email")
     @Mapping(target = "picture" , source ="picture")
-    @Mapping(target = "dateOfBirth" , source ="dateOfBirth")
     @Mapping(target = "password" , source ="password" , ignore = true)
     @Mapping(target = "greenhouses" , source ="greenhouses" , ignore = true)
     User userId(User user);

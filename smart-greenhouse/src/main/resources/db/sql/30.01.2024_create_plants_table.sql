@@ -2,7 +2,7 @@
 CREATE TABLE plants
 (
     id bigserial PRIMARY KEY NOT NULL,
-    name varchar(255),
+    name varchar(255) NOT NULL,
     description varchar,
     image_url varchar,
     const_temperature double precision,

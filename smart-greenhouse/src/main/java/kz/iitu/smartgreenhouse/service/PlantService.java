@@ -6,13 +6,12 @@ import kz.iitu.smartgreenhouse.model.criteria.PlantCriteria;
 import kz.iitu.smartgreenhouse.model.dto.PageResponse;
 import kz.iitu.smartgreenhouse.model.dto.PlantDto;
 import kz.iitu.smartgreenhouse.repository.PlantRepository;
+import kz.iitu.smartgreenhouse.web.rest.errors.BadRequestError;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class PlantService {
@@ -55,5 +54,9 @@ public class PlantService {
         response.setTotalPages(postPage.getTotalPages());
         response.setItems(postPage.getContent());
         return response;
+    }
+
+    public Plant findById(Long id) {
+        return plantRepository.findById(id).orElseThrow(()-> new BadRequestError("Object not found"));
     }
 }

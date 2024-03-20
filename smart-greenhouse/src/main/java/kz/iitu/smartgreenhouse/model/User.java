@@ -33,12 +33,9 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "date_of_birth")
-    private LocalDate dateOfBirth;
-
     @Column(name = "profile_picture")
     private String picture;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner", cascade = CascadeType.REMOVE)
     private List<Greenhouse> greenhouses;
 }
