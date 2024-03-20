@@ -1,17 +1,20 @@
 package kz.iitu.auth.controller;
 
-import kz.iitu.auth.dto.AuthRequest;
-import kz.iitu.auth.dto.AuthResponse;
-import kz.iitu.auth.dto.ProfileInfoDto;
+import kz.iitu.auth.dto.*;
 import kz.iitu.auth.entity.UserCredential;
+import kz.iitu.auth.errors.BadRequestError;
+import kz.iitu.auth.errors.UserNotFoundError;
 import kz.iitu.auth.service.AuthService;
 import kz.iitu.auth.service.UserUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 
 @RestController
 @RequiredArgsConstructor
@@ -31,11 +34,23 @@ public class AuthController extends BaseController{
 
     @PostMapping("/sign-in")
     public ResponseEntity<?> getToken(@RequestBody AuthRequest authRequest) {
+
+        if (service.findUserByEmail(authRequest.getEmail()).isEmpty()){
+            return new ResponseEntity<>(LoginError.builder().
+                    status(403)
+                    .error("Не найдено пользователя").
+                    timestamp(LocalDateTime.now())
+                    .build(), HttpStatus.FORBIDDEN);
+        }
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
         if (authenticate.isAuthenticated()) {
             return ResponseEntity.ok(service.generateToken(authRequest.getEmail()));
         } else {
-            throw new RuntimeException("invalid access");
+            return new ResponseEntity<>(LoginError.builder().
+                    status(403)
+                    .error("Не правильный email или пароль!").
+                    timestamp(LocalDateTime.now())
+                    .build(), HttpStatus.FORBIDDEN);
         }
     }
 

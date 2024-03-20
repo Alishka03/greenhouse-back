@@ -152,6 +152,10 @@ public class AuthService {
         return repository.save(user);
     }
 
+    public Optional<UserCredential> findUserByEmail(String email){
+        return repository.findByEmail(email);
+    }
+
     private ValidationResult<Map<String, Object>> registrationValidationResult(UserCredential userCredential) {
         ValidationResult<Map<String, Object>> validationResult = new ValidationResult<>();
         Map<String, Object> hashMapUser = new HashMap<>();
