@@ -21,6 +21,8 @@ public class ErrorDto {
 
     private Map<String, Object> fieldErrors;
 
+
+
     public int getStatus() {
         return status;
     }
