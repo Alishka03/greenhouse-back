@@ -20,22 +20,16 @@ spring:
         database-platform: org.hibernate.dialect.PostgreSQLDialect
   #Mail sender
   mail:
-    host: post.mail.kz
-    username: nobd@edu.kz
-    password: qaz123WSX#!
+    host: smtp.gmail.com
     port: 587
-    from: nobd@edu.kz
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
-            required: false
-          ssl:
-            enable: false
-            trust: "*"
-        debug: true
+    username: greenhousedevteam@gmail.com
+    password: #PASSWORD
+    protocol: smtp
+    from: greenhousedevteam@gmail.com
+    properties.mail.smtp:
+      auth: true
+      starttls.enable: true
+      ssl.trust: smtp.gmail.com
 
 eureka:
   client:
