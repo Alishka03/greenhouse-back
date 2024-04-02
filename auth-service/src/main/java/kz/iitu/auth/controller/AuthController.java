@@ -1,9 +1,10 @@
 package kz.iitu.auth.controller;
 
-import kz.iitu.auth.dto.*;
+import kz.iitu.auth.dto.AuthRequest;
+import kz.iitu.auth.dto.AuthResponse;
+import kz.iitu.auth.dto.LoginError;
+import kz.iitu.auth.dto.ProfileInfoDto;
 import kz.iitu.auth.entity.UserCredential;
-import kz.iitu.auth.errors.BadRequestError;
-import kz.iitu.auth.errors.UserNotFoundError;
 import kz.iitu.auth.service.AuthService;
 import kz.iitu.auth.service.UserUtils;
 import lombok.RequiredArgsConstructor;
