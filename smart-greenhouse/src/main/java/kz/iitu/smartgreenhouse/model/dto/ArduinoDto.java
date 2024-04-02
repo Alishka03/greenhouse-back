@@ -12,6 +12,7 @@ public class ArduinoDto {
 
     private Float humidity;
 
+    private Float light;
 
     private Float carbonDioxide;
 
@@ -55,5 +56,13 @@ public class ArduinoDto {
 
     public void setPlant(PlantDto plant) {
         this.plant = plant;
+    }
+
+    public Float getLight() {
+        return light;
+    }
+
+    public void setLight(Float light) {
+        this.light = light;
     }
 }

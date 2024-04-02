@@ -5,8 +5,8 @@ import kz.iitu.smartgreenhouse.mapper.ArduinoMapper;
 import kz.iitu.smartgreenhouse.mapper.GreenhouseMapper;
 import kz.iitu.smartgreenhouse.model.Greenhouse;
 import kz.iitu.smartgreenhouse.model.User;
-import kz.iitu.smartgreenhouse.model.dto.GreenhouseDto;
 import kz.iitu.smartgreenhouse.model.criteria.GreenhouseCriteria;
+import kz.iitu.smartgreenhouse.model.dto.GreenhouseDto;
 import kz.iitu.smartgreenhouse.model.dto.PageResponse;
 import kz.iitu.smartgreenhouse.repository.GreenhouseRepository;
 import kz.iitu.smartgreenhouse.web.rest.errors.BadRequestError;
@@ -25,9 +25,8 @@ public class GreenhouseService {
     private final AuthServiceFeign authServiceFeign;
 
     private final ArduinoMapper arduinoMapper;
-
-
     private final GreenhouseMapper mapper;
+
 
     public GreenhouseService(GreenhouseRepository greenhouseRepository, AuthServiceFeign authServiceFeign, ArduinoMapper arduinoMapper, GreenhouseMapper mapper) {
         this.greenhouseRepository = greenhouseRepository;
@@ -101,4 +100,7 @@ public class GreenhouseService {
         List<Greenhouse> greenhouseList = greenhouseRepository.findAllByOwnerId(user.getId());
         return greenhouseList.stream().map(mapper::toDto).collect(Collectors.toList());
     }
+
+
+
 }

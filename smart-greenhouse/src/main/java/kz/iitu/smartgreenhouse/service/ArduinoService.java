@@ -9,6 +9,7 @@ import kz.iitu.smartgreenhouse.model.criteria.ArduinoCriteria;
 import kz.iitu.smartgreenhouse.model.dto.PageResponse;
 import kz.iitu.smartgreenhouse.repository.ArduinoRepository;
 import kz.iitu.smartgreenhouse.web.rest.errors.BadRequestError;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class ArduinoService {
     private final ArduinoRepository arduinoRepository;
 
@@ -77,6 +79,9 @@ public class ArduinoService {
         if(data.getTemperature()!=null){
             entity.setTemperature(data.getTemperature());
         }
+        if(data.getLight()!=null){
+            entity.setLight(data.getLight());
+        }
         return arduinoRepository.save(entity);
     }
 
@@ -84,4 +89,6 @@ public class ArduinoService {
 
         arduinoRepository.deleteById(id);
     }
+
+
 }

@@ -22,16 +22,23 @@ public class Plant implements Serializable {
 
     private String description;
 
-
     @Column(name = "image_url")
     private String imageUrl;
 
-    @Column(name = "const_temperature")
-    private Float temperature;
+    private Float minimumTemperature;
 
-    @Column(name = "const_humidity")
-    private Float humidity;
+    private Float maximumTemperature;
 
-    @Column(name = "const_carbon_dioxide")
-    private Float carbonDioxide;
+    private Float minimumHumidity;
+
+    private Float maximumHumidity;
+
+    private Float minimumLight;
+
+    private Float maximumLight;
+
+    private Float minimumCarbonDioxide;
+
+    private Float maximumCarbonDioxide;
+
 }

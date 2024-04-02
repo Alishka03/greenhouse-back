@@ -2,6 +2,7 @@ package kz.iitu.smartgreenhouse.model.dto;
 
 import jakarta.persistence.Column;
 
+
 public class PlantDto {
 
     private Long id;
@@ -9,11 +10,21 @@ public class PlantDto {
     private String description;
 
     private String imageUrl;
-    private Float temperature;
+    private Float minimumTemperature;
 
-    private Float humidity;
+    private Float maximumTemperature;
 
-    private Float carbonDioxide;
+    private Float minimumHumidity;
+
+    private Float maximumHumidity;
+
+    private Float minimumLight;
+
+    private Float maximumLight;
+
+    private Float minimumCarbonDioxide;
+
+    private Float maximumCarbonDioxide;
 
     public Long getId() {
         return id;
@@ -47,27 +58,67 @@ public class PlantDto {
         this.imageUrl = imageUrl;
     }
 
-    public Float getTemperature() {
-        return temperature;
+    public Float getMinimumTemperature() {
+        return minimumTemperature;
     }
 
-    public void setTemperature(Float temperature) {
-        this.temperature = temperature;
+    public void setMinimumTemperature(Float minimumTemperature) {
+        this.minimumTemperature = minimumTemperature;
     }
 
-    public Float getHumidity() {
-        return humidity;
+    public Float getMaximumTemperature() {
+        return maximumTemperature;
     }
 
-    public void setHumidity(Float humidity) {
-        this.humidity = humidity;
+    public void setMaximumTemperature(Float maximumTemperature) {
+        this.maximumTemperature = maximumTemperature;
     }
 
-    public Float getCarbonDioxide() {
-        return carbonDioxide;
+    public Float getMinimumHumidity() {
+        return minimumHumidity;
     }
 
-    public void setCarbonDioxide(Float carbonDioxide) {
-        this.carbonDioxide = carbonDioxide;
+    public void setMinimumHumidity(Float minimumHumidity) {
+        this.minimumHumidity = minimumHumidity;
+    }
+
+    public Float getMaximumHumidity() {
+        return maximumHumidity;
+    }
+
+    public void setMaximumHumidity(Float maximumHumidity) {
+        this.maximumHumidity = maximumHumidity;
+    }
+
+    public Float getMinimumLight() {
+        return minimumLight;
+    }
+
+    public void setMinimumLight(Float minimumLight) {
+        this.minimumLight = minimumLight;
+    }
+
+    public Float getMaximumLight() {
+        return maximumLight;
+    }
+
+    public void setMaximumLight(Float maximumLight) {
+        this.maximumLight = maximumLight;
+    }
+
+    public Float getMinimumCarbonDioxide() {
+        return minimumCarbonDioxide;
+    }
+
+    public void setMinimumCarbonDioxide(Float minimumCarbonDioxide) {
+        this.minimumCarbonDioxide = minimumCarbonDioxide;
+    }
+
+    public Float getMaximumCarbonDioxide() {
+        return maximumCarbonDioxide;
+    }
+
+    public void setMaximumCarbonDioxide(Float maximumCarbonDioxide) {
+        this.maximumCarbonDioxide = maximumCarbonDioxide;
     }
 }

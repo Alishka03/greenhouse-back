@@ -21,6 +21,8 @@ public class Arduino implements Serializable {
 
     private Float humidity;
 
+    private Float light;
+
     @Column(name = "carbon_dioxide")
     private Float carbonDioxide;
 

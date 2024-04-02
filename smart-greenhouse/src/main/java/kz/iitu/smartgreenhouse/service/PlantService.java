@@ -7,6 +7,7 @@ import kz.iitu.smartgreenhouse.model.dto.PageResponse;
 import kz.iitu.smartgreenhouse.model.dto.PlantDto;
 import kz.iitu.smartgreenhouse.repository.PlantRepository;
 import kz.iitu.smartgreenhouse.web.rest.errors.BadRequestError;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class PlantService {
     private final PlantRepository plantRepository;
 
