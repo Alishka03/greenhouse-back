@@ -33,12 +33,18 @@ public class LoggingAspect {
         loggerELK.setDateTime(LocalDateTime.now());
         try {
             Object response = joinPoint.proceed(joinPoint.getArgs());
-            CustomResponse<?> ifSuccessFalse = (CustomResponse<?>) response;
-            if (!ifSuccessFalse.getSuccess()) {
-                throw new Exception("success = false");
-            }
-
+//            CustomResponse<?> ifSuccessFalse = (CustomResponse<?>) response;
+//            if (!ifSuccessFalse.getSuccess()) {
+//                throw new Exception("success = false");
+//            }
             if (joinPoint.getSignature().getName().equals("insertData")) {
+                ArduinoData temp = (ArduinoData) parameters.get("data");
+                loggerELK.setArduinoId(temp.getId());
+                loggerELK.setHumidity(temp.getHumidity());
+                loggerELK.setCo2(temp.getCo2());
+                loggerELK.setTemperature(temp.getTemperature());
+            }
+            if (joinPoint.getSignature().getName().equals("insertDataTest")){
                 ArduinoData temp = (ArduinoData) parameters.get("data");
                 loggerELK.setArduinoId(temp.getId());
                 loggerELK.setHumidity(temp.getHumidity());

@@ -38,8 +38,8 @@ public class GreenhouseController extends BaseController{
     }
 
     @GetMapping("/my")
-    public ResponseEntity<?> getMyGreenhouses( @RequestHeader("Authorization") String bearerToken){
-        return ResponseEntity.ok(greenhouseService.getMyGreenhouses(bearerToken));
+    public ResponseEntity<?> getMyGreenhouses( @RequestHeader("Authorization") String bearerToken , @RequestParam(value = "sortByName",required = false) Boolean value){
+        return ResponseEntity.ok(greenhouseService.getMyGreenhouses(bearerToken,value));
     }
     //TODO : 1)GREENHOUSE SORTING BY NAME ,TRY TO : PLANTS IN IT 2)ARDUINO SORTING BY NAME; 3)WARNING OF GREENHOUSE!!!
 }

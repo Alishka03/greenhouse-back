@@ -6,6 +6,7 @@ import kz.iitu.smartgreenhouse.model.criteria.ArduinoCriteria;
 import kz.iitu.smartgreenhouse.model.criteria.ArduinoData;
 import kz.iitu.smartgreenhouse.model.dto.ArduinoDto;
 import kz.iitu.smartgreenhouse.model.dto.PageResponse;
+import kz.iitu.smartgreenhouse.model.dto.WarningDto;
 import kz.iitu.smartgreenhouse.model.wrapper.CustomResponse;
 import kz.iitu.smartgreenhouse.service.ArduinoService;
 import lombok.extern.slf4j.Slf4j;
@@ -51,9 +52,15 @@ public class ArduinoController extends BaseController {
     }
 
     @LoggingAspect
+    @PostMapping("/insert-data/test")
+    public CustomResponse<?> insertData(ArduinoData data){
+        return new CustomResponse<>(true,arduinoService.insertingData(data),null);
+    }
+
+    @LoggingAspect
     @PostMapping("/insert-data")
-    public CustomResponse<Arduino> insertData(ArduinoData data){
-        return new CustomResponse<>(true,arduinoService.insertData(data),null);
+    public WarningDto insertDataTest(ArduinoData data){
+        return arduinoService.insertDataTest(data);
     }
 
     @DeleteMapping("/{id}")

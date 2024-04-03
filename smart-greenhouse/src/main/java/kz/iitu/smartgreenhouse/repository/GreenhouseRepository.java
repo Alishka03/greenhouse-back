@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface GreenhouseRepository extends JpaRepository<Greenhouse,Long> {
     List<Greenhouse> findAllByOwnerId(Long id);
+
+    List<Greenhouse> findByOwner_IdOrderByNameAsc(Long id);
 }
