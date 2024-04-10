@@ -29,3 +29,7 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8767/eureka/
+
+firebase:
+  key: AAAAeqkAQBU:APA91bEUJ5BcaMOsMeyRz9cl1q6jzfwxQVCzhWyyWVFuW-2uneFBvGBVphAtLMfL1jcCtc8OgxLSznSeE8trNvCetHSRw2gnzgJYV86kEgSxwtQsC0FH5wAOKkXC5DqelvXqXmbUYa6n
+  url: https://fcm.googleapis.com/fcm/send

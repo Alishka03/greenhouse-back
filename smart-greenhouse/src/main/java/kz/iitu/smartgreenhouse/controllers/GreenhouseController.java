@@ -26,7 +26,7 @@ public class GreenhouseController extends BaseController{
         return ResponseEntity.ok(greenhouseService.findById(id));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping
     public ResponseEntity<?> updateGreenhouse(@RequestBody GreenhouseDto dto,@RequestHeader("Authorization") String bearerToken){
         return ResponseEntity.ok(greenhouseService.updateGreenhouse(dto,bearerToken));
     }
@@ -41,5 +41,6 @@ public class GreenhouseController extends BaseController{
     public ResponseEntity<?> getMyGreenhouses( @RequestHeader("Authorization") String bearerToken , @RequestParam(value = "sortByName",required = false) Boolean value){
         return ResponseEntity.ok(greenhouseService.getMyGreenhouses(bearerToken,value));
     }
+
     //TODO : 1)GREENHOUSE SORTING BY NAME ,TRY TO : PLANTS IN IT 2)ARDUINO SORTING BY NAME; 3)WARNING OF GREENHOUSE!!!
 }

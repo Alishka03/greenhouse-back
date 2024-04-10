@@ -4,6 +4,7 @@ import kz.iitu.smartgreenhouse.feign.AuthServiceFeign;
 import kz.iitu.smartgreenhouse.mapper.ArduinoMapper;
 import kz.iitu.smartgreenhouse.model.Arduino;
 import kz.iitu.smartgreenhouse.model.Plant;
+import kz.iitu.smartgreenhouse.model.User;
 import kz.iitu.smartgreenhouse.model.criteria.ArduinoData;
 import kz.iitu.smartgreenhouse.model.dto.ArduinoDto;
 import kz.iitu.smartgreenhouse.model.criteria.ArduinoCriteria;
@@ -11,6 +12,7 @@ import kz.iitu.smartgreenhouse.model.dto.InsertResponseDto;
 import kz.iitu.smartgreenhouse.model.dto.PageResponse;
 import kz.iitu.smartgreenhouse.model.dto.WarningDto;
 import kz.iitu.smartgreenhouse.repository.ArduinoRepository;
+import kz.iitu.smartgreenhouse.repository.UserRepository;
 import kz.iitu.smartgreenhouse.web.rest.errors.BadRequestError;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -28,10 +30,16 @@ public class ArduinoService {
 
     private final AuthServiceFeign authServiceFeign;
 
-    public ArduinoService(ArduinoRepository arduinoRepository, ArduinoMapper arduinoMapper, AuthServiceFeign authServiceFeign) {
+    private final UserRepository userRepository;
+
+    private final NotificationService notificationService;
+
+    public ArduinoService(ArduinoRepository arduinoRepository, ArduinoMapper arduinoMapper, AuthServiceFeign authServiceFeign, UserRepository userRepository, NotificationService notificationService) {
         this.arduinoRepository = arduinoRepository;
         this.arduinoMapper = arduinoMapper;
         this.authServiceFeign = authServiceFeign;
+        this.userRepository = userRepository;
+        this.notificationService = notificationService;
     }
 
     public Arduino save(ArduinoDto arduinoDto) {
@@ -137,7 +145,7 @@ public class ArduinoService {
         }
         Arduino arduino = optionalArduino.get();
         Plant currentPlant = arduino.getPlant();
-
+        Optional<User> host = userRepository.findByArduinoId(data.getId());
         boolean optimalTemperature = isWithinRange(data.getTemperature(), currentPlant.getMinimumTemperature(), currentPlant.getMaximumTemperature());
         boolean optimalHumidity = isWithinRange(data.getHumidity(), currentPlant.getMinimumHumidity(), currentPlant.getMaximumHumidity());
         boolean optimalLight = isWithinRange(data.getLight(), currentPlant.getMinimumLight(), currentPlant.getMaximumLight());
@@ -155,8 +163,14 @@ public class ArduinoService {
         if (data.getLight() != null) {
             arduino.setLight(data.getLight());
         }
-        Arduino savedArduino = arduinoRepository.save(arduino);
+        arduinoRepository.save(arduino);
         WarningDto warningDto = new WarningDto(optimalTemperature, optimalHumidity, optimalLight, optimalCarbonDioxide);
+        if (!optimalTemperature || !optimalHumidity || !optimalLight || !optimalCarbonDioxide) {
+            if(host.isPresent()){
+                notificationService.sendNotification(host.get().getDeviceId(),warningDto);
+            }
+        }
+
         return warningDto;
     }
 }

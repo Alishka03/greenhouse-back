@@ -12,6 +12,7 @@ import kz.iitu.smartgreenhouse.model.dto.GreenhouseDto;
 import kz.iitu.smartgreenhouse.model.dto.GreenhouseResponseDto;
 import kz.iitu.smartgreenhouse.model.dto.PageResponse;
 import kz.iitu.smartgreenhouse.model.dto.WarningDto;
+import kz.iitu.smartgreenhouse.repository.ArduinoRepository;
 import kz.iitu.smartgreenhouse.repository.GreenhouseRepository;
 import kz.iitu.smartgreenhouse.web.rest.errors.BadRequestError;
 import kz.iitu.smartgreenhouse.web.rest.errors.ObjectNotFoundError;
@@ -33,11 +34,13 @@ public class GreenhouseService {
     private final GreenhouseMapper mapper;
 
 
-    public GreenhouseService(GreenhouseRepository greenhouseRepository, AuthServiceFeign authServiceFeign, ArduinoMapper arduinoMapper, GreenhouseMapper mapper) {
+    private final ArduinoRepository arduinoRepository;
+    public GreenhouseService(GreenhouseRepository greenhouseRepository, AuthServiceFeign authServiceFeign, ArduinoMapper arduinoMapper, GreenhouseMapper mapper,  ArduinoRepository arduinoRepository) {
         this.greenhouseRepository = greenhouseRepository;
         this.authServiceFeign = authServiceFeign;
         this.arduinoMapper = arduinoMapper;
         this.mapper = mapper;
+        this.arduinoRepository = arduinoRepository;
     }
 
     public GreenhouseDto save(GreenhouseDto greenhouseDto,String token) {
@@ -54,8 +57,12 @@ public class GreenhouseService {
         return greenhouseRepository
                 .findById(greenhouseDto.getId())
                 .map(existingGreenhouse -> {
-                    existingGreenhouse.setName(greenhouseDto.getName());
-                    existingGreenhouse.setArduino(arduinoMapper.toEntity(greenhouseDto.getArduino()));
+                    if (greenhouseDto.getName() != null) {
+                        existingGreenhouse.setName(greenhouseDto.getName());
+                    }
+                    if (greenhouseDto.getArduino() != null) {
+                        existingGreenhouse.setArduino(arduinoRepository.findById(greenhouseDto.getArduino().getId()).orElseThrow(() -> new ObjectNotFoundError("Arduino not found with id: "+ greenhouseDto.getArduino().getId())));
+                    }
                     return existingGreenhouse;
                 })
                 .map(greenhouseRepository::save)
@@ -83,8 +90,9 @@ public class GreenhouseService {
     public Optional<GreenhouseDto> updateGreenhouse(GreenhouseDto dto, String bearerToken) {
         User user = authServiceFeign.getCurrentUser(bearerToken);
         List<Greenhouse> greenhouseList = greenhouseRepository.findAllByOwnerId(user.getId());
-        Greenhouse givenGreenhouse = greenhouseRepository.findById(dto.getId()).orElseThrow(() -> new ObjectNotFoundError("Greenhouse not found with id: "+dto.getId()));
-        if(!greenhouseList.contains(givenGreenhouse)){
+        Greenhouse givenGreenhouse = greenhouseRepository.findById(dto.getId())
+                .orElseThrow(() -> new ObjectNotFoundError("Greenhouse not found with id: " + dto.getId()));
+        if (!greenhouseList.contains(givenGreenhouse)) {
             throw new BadRequestError("You don't have permission to update this greenhouse");
         }
         return partialUpdate(dto);
