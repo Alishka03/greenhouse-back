@@ -17,4 +17,5 @@ public class AuthResponse {
     private String firstName;
     private String lastName;
     private String profilePicture;
+    private String deviceId;
 }

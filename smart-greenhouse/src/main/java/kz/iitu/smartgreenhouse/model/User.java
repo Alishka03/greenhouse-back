@@ -36,6 +36,9 @@ public class User {
     @Column(name = "profile_picture")
     private String picture;
 
+    @Column(name = "device_id")
+    private String deviceId;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner", cascade = CascadeType.REMOVE)
     private List<Greenhouse> greenhouses;
 }

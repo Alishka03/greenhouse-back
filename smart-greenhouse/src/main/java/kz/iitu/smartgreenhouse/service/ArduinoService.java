@@ -3,12 +3,18 @@ package kz.iitu.smartgreenhouse.service;
 import kz.iitu.smartgreenhouse.feign.AuthServiceFeign;
 import kz.iitu.smartgreenhouse.mapper.ArduinoMapper;
 import kz.iitu.smartgreenhouse.model.Arduino;
+import kz.iitu.smartgreenhouse.model.Plant;
+import kz.iitu.smartgreenhouse.model.User;
 import kz.iitu.smartgreenhouse.model.criteria.ArduinoData;
 import kz.iitu.smartgreenhouse.model.dto.ArduinoDto;
 import kz.iitu.smartgreenhouse.model.criteria.ArduinoCriteria;
+import kz.iitu.smartgreenhouse.model.dto.InsertResponseDto;
 import kz.iitu.smartgreenhouse.model.dto.PageResponse;
+import kz.iitu.smartgreenhouse.model.dto.WarningDto;
 import kz.iitu.smartgreenhouse.repository.ArduinoRepository;
+import kz.iitu.smartgreenhouse.repository.UserRepository;
 import kz.iitu.smartgreenhouse.web.rest.errors.BadRequestError;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -16,6 +22,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class ArduinoService {
     private final ArduinoRepository arduinoRepository;
 
@@ -23,10 +30,16 @@ public class ArduinoService {
 
     private final AuthServiceFeign authServiceFeign;
 
-    public ArduinoService(ArduinoRepository arduinoRepository, ArduinoMapper arduinoMapper, AuthServiceFeign authServiceFeign) {
+    private final UserRepository userRepository;
+
+    private final NotificationService notificationService;
+
+    public ArduinoService(ArduinoRepository arduinoRepository, ArduinoMapper arduinoMapper, AuthServiceFeign authServiceFeign, UserRepository userRepository, NotificationService notificationService) {
         this.arduinoRepository = arduinoRepository;
         this.arduinoMapper = arduinoMapper;
         this.authServiceFeign = authServiceFeign;
+        this.userRepository = userRepository;
+        this.notificationService = notificationService;
     }
 
     public Arduino save(ArduinoDto arduinoDto) {
@@ -68,6 +81,7 @@ public class ArduinoService {
             throw new BadRequestError("Arduino not found with ID : "+data.getId());
         }
         Arduino entity = arduino.get();
+        Plant currentPlant = entity.getPlant();
         if(data.getCo2()!=null){
             entity.setCarbonDioxide(data.getCo2());
         }
@@ -77,11 +91,86 @@ public class ArduinoService {
         if(data.getTemperature()!=null){
             entity.setTemperature(data.getTemperature());
         }
-        return arduinoRepository.save(entity);
+        if(data.getLight()!=null){
+            entity.setLight(data.getLight());
+        }
+        Arduino saved = arduinoRepository.save(entity);
+        return saved;
     }
 
     public void deleteArduino(Long id) {
 
         arduinoRepository.deleteById(id);
+    }
+
+    public InsertResponseDto insertingData(ArduinoData data) {
+        Optional<Arduino> optionalArduino = arduinoRepository.findById(data.getId());
+        if (optionalArduino.isEmpty()) {
+            throw new BadRequestError("Arduino not found with ID: " + data.getId());
+        }
+        Arduino arduino = optionalArduino.get();
+        Plant currentPlant = arduino.getPlant();
+
+        boolean optimalTemperature = isWithinRange(data.getTemperature(), currentPlant.getMinimumTemperature(), currentPlant.getMaximumTemperature());
+        boolean optimalHumidity = isWithinRange(data.getHumidity(), currentPlant.getMinimumHumidity(), currentPlant.getMaximumHumidity());
+        boolean optimalLight = isWithinRange(data.getLight(), currentPlant.getMinimumLight(), currentPlant.getMaximumLight());
+        boolean optimalCarbonDioxide = isWithinRange(data.getCo2(), currentPlant.getMinimumCarbonDioxide(), currentPlant.getMaximumCarbonDioxide());
+
+        if (data.getCo2() != null) {
+            arduino.setCarbonDioxide(data.getCo2());
+        }
+        if (data.getHumidity() != null) {
+            arduino.setHumidity(data.getHumidity());
+        }
+        if (data.getTemperature() != null) {
+            arduino.setTemperature(data.getTemperature());
+        }
+        if (data.getLight() != null) {
+            arduino.setLight(data.getLight());
+        }
+        Arduino savedArduino = arduinoRepository.save(arduino);
+        WarningDto warningDto = new WarningDto(optimalTemperature, optimalHumidity, optimalLight, optimalCarbonDioxide);
+        return new InsertResponseDto(savedArduino, warningDto);
+    }
+
+    private boolean isWithinRange(Float value, Float min, Float max) {
+        return value != null && value >= min && value <= max;
+    }
+
+
+    public WarningDto insertDataTest(ArduinoData data) {
+        Optional<Arduino> optionalArduino = arduinoRepository.findById(data.getId());
+        if (optionalArduino.isEmpty()) {
+            throw new BadRequestError("Arduino not found with ID: " + data.getId());
+        }
+        Arduino arduino = optionalArduino.get();
+        Plant currentPlant = arduino.getPlant();
+        Optional<User> host = userRepository.findByArduinoId(data.getId());
+        boolean optimalTemperature = isWithinRange(data.getTemperature(), currentPlant.getMinimumTemperature(), currentPlant.getMaximumTemperature());
+        boolean optimalHumidity = isWithinRange(data.getHumidity(), currentPlant.getMinimumHumidity(), currentPlant.getMaximumHumidity());
+        boolean optimalLight = isWithinRange(data.getLight(), currentPlant.getMinimumLight(), currentPlant.getMaximumLight());
+        boolean optimalCarbonDioxide = isWithinRange(data.getCo2(), currentPlant.getMinimumCarbonDioxide(), currentPlant.getMaximumCarbonDioxide());
+
+        if (data.getCo2() != null) {
+            arduino.setCarbonDioxide(data.getCo2());
+        }
+        if (data.getHumidity() != null) {
+            arduino.setHumidity(data.getHumidity());
+        }
+        if (data.getTemperature() != null) {
+            arduino.setTemperature(data.getTemperature());
+        }
+        if (data.getLight() != null) {
+            arduino.setLight(data.getLight());
+        }
+        arduinoRepository.save(arduino);
+        WarningDto warningDto = new WarningDto(optimalTemperature, optimalHumidity, optimalLight, optimalCarbonDioxide);
+        if (!optimalTemperature || !optimalHumidity || !optimalLight || !optimalCarbonDioxide) {
+            if(host.isPresent()){
+                notificationService.sendNotification(host.get().getDeviceId(),warningDto);
+            }
+        }
+
+        return warningDto;
     }
 }

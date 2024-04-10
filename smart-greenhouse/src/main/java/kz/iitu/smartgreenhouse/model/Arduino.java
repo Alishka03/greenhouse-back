@@ -14,12 +14,13 @@ import java.io.Serializable;
 @Builder
 public class Arduino implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Float temperature;
 
     private Float humidity;
+
+    private Float light;
 
     @Column(name = "carbon_dioxide")
     private Float carbonDioxide;

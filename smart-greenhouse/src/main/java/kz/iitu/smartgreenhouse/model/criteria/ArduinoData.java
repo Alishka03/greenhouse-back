@@ -7,6 +7,8 @@ public class ArduinoData {
 
     private Float co2;
 
+    private Float light;
+
 
     public Long getId() {
         return id;
@@ -38,5 +40,13 @@ public class ArduinoData {
 
     public void setCo2(Float co2) {
         this.co2 = co2;
+    }
+
+    public Float getLight() {
+        return light;
+    }
+
+    public void setLight(Float light) {
+        this.light = light;
     }
 }

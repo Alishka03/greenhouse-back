@@ -1,6 +1,6 @@
 create table arduinos
 (
-    id   bigserial primary key not null,
+    id  bigserial primary key not null,
     temperature    float,
     humidity       float,
     carbon_dioxide float,

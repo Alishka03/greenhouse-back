@@ -5,6 +5,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import kz.iitu.smartgreenhouse.model.Plant;
 
+
 public class ArduinoDto {
 
     private Long id;
@@ -12,6 +13,7 @@ public class ArduinoDto {
 
     private Float humidity;
 
+    private Float light;
 
     private Float carbonDioxide;
 
@@ -55,5 +57,24 @@ public class ArduinoDto {
 
     public void setPlant(PlantDto plant) {
         this.plant = plant;
+    }
+
+    public Float getLight() {
+        return light;
+    }
+
+    public void setLight(Float light) {
+        this.light = light;
+    }
+
+    public ArduinoDto() {
+    }
+
+    public ArduinoDto(Long id, Float temperature, Float humidity, Float light, Float carbonDioxide) {
+        this.id = id;
+        this.temperature = temperature;
+        this.humidity = humidity;
+        this.light = light;
+        this.carbonDioxide = carbonDioxide;
     }
 }

@@ -21,4 +21,10 @@
     <changeSet author="Alisher" id="7">
         <sqlFile path="classpath:/db/sql/31.01.2024_create_greenhouses_table.sql" relativeToChangelogFile="false" splitStatements="true"/>
     </changeSet>
+    <changeSet author="Alisher" id="8">
+        <sqlFile path="classpath:/db/sql/29.03.2024_alter_table_greenhouse.sql" relativeToChangelogFile="false" splitStatements="true"/>
+    </changeSet>
+    <changeSet author="Alisher" id="9">
+        <sqlFile path="classpath:/db/sql/09.04.2024_add_device_id.sql" relativeToChangelogFile="false" splitStatements="true"/>
+    </changeSet>
 </databaseChangeLog>

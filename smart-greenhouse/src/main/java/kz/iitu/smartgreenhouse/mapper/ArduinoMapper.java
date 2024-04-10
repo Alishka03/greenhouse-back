@@ -11,6 +11,7 @@ public interface ArduinoMapper extends EntityMapper<ArduinoDto, Arduino> {
     @Mapping(target = "temperature" ,source = "temperature")
     @Mapping(target = "humidity" ,source = "humidity")
     @Mapping(target = "carbonDioxide" ,source = "carbonDioxide")
+    @Mapping(target = "light" ,source = "light")
     @Mapping(target = "plant" ,source = "plant")
     ArduinoDto toDto(Arduino entity);
 
@@ -18,6 +19,7 @@ public interface ArduinoMapper extends EntityMapper<ArduinoDto, Arduino> {
     @Mapping(target = "temperature" ,source = "temperature")
     @Mapping(target = "humidity" ,source = "humidity")
     @Mapping(target = "carbonDioxide" ,source = "carbonDioxide")
+    @Mapping(target = "light" ,source = "light")
     @Mapping(target = "plant" ,source = "plant")
     ArduinoDto base(Arduino arduino);
 }

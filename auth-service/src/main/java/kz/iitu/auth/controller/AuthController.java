@@ -1,9 +1,10 @@
 package kz.iitu.auth.controller;
 
-import kz.iitu.auth.dto.*;
+import kz.iitu.auth.dto.AuthRequest;
+import kz.iitu.auth.dto.AuthResponse;
+import kz.iitu.auth.dto.LoginError;
+import kz.iitu.auth.dto.ProfileInfoDto;
 import kz.iitu.auth.entity.UserCredential;
-import kz.iitu.auth.errors.BadRequestError;
-import kz.iitu.auth.errors.UserNotFoundError;
 import kz.iitu.auth.service.AuthService;
 import kz.iitu.auth.service.UserUtils;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +34,7 @@ public class AuthController extends BaseController{
     }
 
     @PostMapping("/sign-in")
-    public ResponseEntity<?> getToken(@RequestBody AuthRequest authRequest) {
+    public ResponseEntity<?> getToken(@RequestBody AuthRequest authRequest,@RequestHeader("device_id") String deviceId) {
 
         if (service.findUserByEmail(authRequest.getEmail()).isEmpty()){
             return new ResponseEntity<>(LoginError.builder().
@@ -44,7 +45,7 @@ public class AuthController extends BaseController{
         }
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
         if (authenticate.isAuthenticated()) {
-            return ResponseEntity.ok(service.generateToken(authRequest.getEmail()));
+            return ResponseEntity.ok(service.generateToken(authRequest.getEmail(),deviceId));
         } else {
             return new ResponseEntity<>(LoginError.builder().
                     status(403)
