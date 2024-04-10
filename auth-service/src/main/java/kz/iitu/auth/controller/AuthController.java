@@ -34,7 +34,7 @@ public class AuthController extends BaseController{
     }
 
     @PostMapping("/sign-in")
-    public ResponseEntity<?> getToken(@RequestBody AuthRequest authRequest) {
+    public ResponseEntity<?> getToken(@RequestBody AuthRequest authRequest,@RequestHeader("device_id") String deviceId) {
 
         if (service.findUserByEmail(authRequest.getEmail()).isEmpty()){
             return new ResponseEntity<>(LoginError.builder().
@@ -45,7 +45,7 @@ public class AuthController extends BaseController{
         }
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
         if (authenticate.isAuthenticated()) {
-            return ResponseEntity.ok(service.generateToken(authRequest.getEmail()));
+            return ResponseEntity.ok(service.generateToken(authRequest.getEmail(),deviceId));
         } else {
             return new ResponseEntity<>(LoginError.builder().
                     status(403)

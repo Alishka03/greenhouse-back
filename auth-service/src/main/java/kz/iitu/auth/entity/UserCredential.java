@@ -32,6 +32,8 @@ public class UserCredential {
     @Column(name = "profile_picture")
     private String picture;
 
+    @Column(name = "device_id")
+    private String deviceId;
 
 //    private String role;
 }

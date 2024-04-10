@@ -57,17 +57,17 @@ public class AuthService {
 
     }
 
-    public AuthResponse generateToken(String username) {
-        Optional<UserCredential> user = repository.findByEmail(username);
-        if (user.isEmpty()) {
-            throw new ForbiddenError("User not found with email : " + username);
-        }
+    public AuthResponse generateToken(String username,String deviceId) {
+        UserCredential user = repository.findByEmail(username).orElseThrow(()-> new ForbiddenError("User not found with email : " + username));
+        user.setDeviceId(deviceId);
+        repository.save(user);
         return AuthResponse.builder()
                 .userId(Objects.requireNonNull(repository.findByEmail(username).orElse(null)).getId())
-                .lastName(user.get().getLastname())
-                .firstName(user.get().getFirstname())
-                .profilePicture(user.get().getPicture())
+                .lastName(user.getLastname())
+                .firstName(user.getFirstname())
+                .profilePicture(user.getPicture())
                 .token(jwtService.generateToken(username))
+                .deviceId(user.getDeviceId())
                 .build();
     }
 
