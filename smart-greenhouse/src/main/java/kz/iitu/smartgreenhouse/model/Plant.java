@@ -29,9 +29,13 @@ public class Plant implements Serializable {
 
     private Float maximumTemperature;
 
-    private Float minimumHumidity;
+    private Float minimumHumidityAir;
 
-    private Float maximumHumidity;
+    private Float maximumHumidityAir;
+
+    private Float minimumHumidityGround;
+
+    private Float maximumHumidityGround;
 
     private Float minimumLight;
 

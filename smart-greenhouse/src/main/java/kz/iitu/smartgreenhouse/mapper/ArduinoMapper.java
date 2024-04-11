@@ -9,7 +9,8 @@ import org.mapstruct.Named;
 @Mapper(componentModel = "spring",uses = {PlantMapper.class})
 public interface ArduinoMapper extends EntityMapper<ArduinoDto, Arduino> {
     @Mapping(target = "temperature" ,source = "temperature")
-    @Mapping(target = "humidity" ,source = "humidity")
+    @Mapping(target = "humidityAir" ,source = "humidityAir")
+    @Mapping(target = "humidityGround" ,source = "humidityGround")
     @Mapping(target = "carbonDioxide" ,source = "carbonDioxide")
     @Mapping(target = "light" ,source = "light")
     @Mapping(target = "plant" ,source = "plant")
@@ -17,7 +18,8 @@ public interface ArduinoMapper extends EntityMapper<ArduinoDto, Arduino> {
 
     @Named("base")
     @Mapping(target = "temperature" ,source = "temperature")
-    @Mapping(target = "humidity" ,source = "humidity")
+    @Mapping(target = "humidityAir" ,source = "humidityAir")
+    @Mapping(target = "humidityGround" ,source = "humidityGround")
     @Mapping(target = "carbonDioxide" ,source = "carbonDioxide")
     @Mapping(target = "light" ,source = "light")
     @Mapping(target = "plant" ,source = "plant")

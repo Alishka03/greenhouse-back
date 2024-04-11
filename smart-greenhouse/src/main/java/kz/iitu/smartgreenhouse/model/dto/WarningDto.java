@@ -8,7 +8,8 @@ import lombok.*;
 @Builder
 public class WarningDto {
     private Boolean optimalTemperature;
-    private Boolean optimalHumidity;
+    private Boolean optimalHumidityAir;
+    private Boolean optimalHumidityGround;
     private Boolean optimalLight;
     private Boolean optimalCarbonDioxide;
 
@@ -18,8 +19,11 @@ public class WarningDto {
         if (optimalTemperature != null && !optimalTemperature) {
             warningMessage.append(" temperature,");
         }
-        if (optimalHumidity != null && !optimalHumidity) {
-            warningMessage.append(" humidity,");
+        if (optimalHumidityAir != null && !optimalHumidityAir) {
+            warningMessage.append(" humidity air,");
+        }
+        if (optimalHumidityAir != null && !optimalHumidityAir) {
+            warningMessage.append(" humidity ground,");
         }
         if (optimalLight != null && !optimalLight) {
             warningMessage.append(" light,");
@@ -34,5 +38,7 @@ public class WarningDto {
 
         return warningMessage.toString();
     }
+
+
 
 }

@@ -14,6 +14,8 @@ public class LoggerELK {
     private Long arduinoId;
     private Float temperature;
     private Float co2;
-    private Float humidity;
+    private Float humidityAir;
+    private Float humidityGround;
+    private Float light;
     private LocalDateTime dateTime;
 }
