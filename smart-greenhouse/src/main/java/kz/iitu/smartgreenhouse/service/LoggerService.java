@@ -108,6 +108,8 @@ public class LoggerService {
         float totalHumidityGround = 0;
         float totalLight = 0;
 
+        int numberOfLogs = logs.size();
+
         for (LoggerEntity log : logs) {
             totalTemperature += log.getTemperature();
             totalCO2 += log.getCo2();
@@ -120,18 +122,17 @@ public class LoggerService {
             totalLight += log.getLight();
         }
 
-        int numberOfLogs = logs.size();
-
-        float avgTemperature = totalTemperature / numberOfLogs;
-        float avgCO2 = totalCO2 / numberOfLogs;
-        Float avgHumidityAir = numberOfLogs > 0 ? totalHumidityAir / numberOfLogs : null;
-        Float avgHumidityGround = numberOfLogs > 0 ? totalHumidityGround / numberOfLogs : null;
-        float avgLight = totalLight / numberOfLogs;
+        float avgTemperature = numberOfLogs > 0 ? totalTemperature / numberOfLogs : 0;
+        float avgCO2 = numberOfLogs > 0 ? totalCO2 / numberOfLogs : 0;
+        float avgHumidityAir = numberOfLogs > 0 ? totalHumidityAir / numberOfLogs : 0;
+        float avgHumidityGround = numberOfLogs > 0 ? totalHumidityGround / numberOfLogs : 0;
+        float avgLight = numberOfLogs > 0 ? totalLight / numberOfLogs : 0;
 
         AnalyticResponseDTO.Averages averages = new AnalyticResponseDTO.Averages(avgTemperature, avgCO2, avgHumidityAir, avgHumidityGround, avgLight);
 
         return new AnalyticResponseDTO.AveragesPerDay(date, averages);
     }
+
 
 
 
