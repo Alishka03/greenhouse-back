@@ -152,6 +152,9 @@ public class ArduinoService {
         if (data.getLight() != null) {
             arduino.setLight(data.getLight());
         }
+        if(data.getHumidityGround()!=null){
+            arduino.setHumidityGround(data.getHumidityGround());
+        }
         arduinoRepository.save(arduino);
         WarningDto warningDto = WarningDto.builder()
                 .optimalTemperature(optimalTemperature)
