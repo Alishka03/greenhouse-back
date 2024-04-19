@@ -3,6 +3,7 @@ package kz.iitu.smartgreenhouse.service;
 import kz.iitu.smartgreenhouse.feign.AuthServiceFeign;
 import kz.iitu.smartgreenhouse.mapper.ArduinoMapper;
 import kz.iitu.smartgreenhouse.model.Arduino;
+import kz.iitu.smartgreenhouse.model.Notifications;
 import kz.iitu.smartgreenhouse.model.Plant;
 import kz.iitu.smartgreenhouse.model.User;
 import kz.iitu.smartgreenhouse.model.criteria.ArduinoData;
@@ -34,12 +35,15 @@ public class ArduinoService {
 
     private final NotificationService notificationService;
 
-    public ArduinoService(ArduinoRepository arduinoRepository, ArduinoMapper arduinoMapper, AuthServiceFeign authServiceFeign, UserRepository userRepository, NotificationService notificationService) {
+    private final NotificationsEntityService notificationsEntityService;
+
+    public ArduinoService(ArduinoRepository arduinoRepository, ArduinoMapper arduinoMapper, AuthServiceFeign authServiceFeign, UserRepository userRepository, NotificationService notificationService, NotificationsEntityService notificationsEntityService) {
         this.arduinoRepository = arduinoRepository;
         this.arduinoMapper = arduinoMapper;
         this.authServiceFeign = authServiceFeign;
         this.userRepository = userRepository;
         this.notificationService = notificationService;
+        this.notificationsEntityService = notificationsEntityService;
     }
 
     public Arduino save(ArduinoDto arduinoDto) {
@@ -135,11 +139,12 @@ public class ArduinoService {
         Plant currentPlant = arduino.getPlant();
         Optional<User> host = userRepository.findByArduinoId(data.getId());
         boolean optimalTemperature = isWithinRange(data.getTemperature(), currentPlant.getMinimumTemperature(), currentPlant.getMaximumTemperature());
-        boolean optimalHumidityAir = isWithinRange(data.getHumidityAir(), currentPlant.getMinimumHumidityGround(), currentPlant.getMaximumHumidityGround());
+        boolean optimalHumidityAir = isWithinRange(data.getHumidityAir(), currentPlant.getMinimumHumidityAir(), currentPlant.getMaximumHumidityAir());
         boolean optimalHumidityGround = isWithinRange(data.getHumidityGround(), currentPlant.getMinimumHumidityGround(), currentPlant.getMaximumHumidityGround());
         boolean optimalLight = isWithinRange(data.getLight(), currentPlant.getMinimumLight(), currentPlant.getMaximumLight());
         boolean optimalCarbonDioxide = isWithinRange(data.getCo2(), currentPlant.getMinimumCarbonDioxide(), currentPlant.getMaximumCarbonDioxide());
 
+        // Update arduino with new sensor data
         if (data.getCo2() != null) {
             arduino.setCarbonDioxide(data.getCo2());
         }
@@ -152,23 +157,77 @@ public class ArduinoService {
         if (data.getLight() != null) {
             arduino.setLight(data.getLight());
         }
-        if(data.getHumidityGround()!=null){
+        if (data.getHumidityGround() != null) {
             arduino.setHumidityGround(data.getHumidityGround());
         }
         arduinoRepository.save(arduino);
-        WarningDto warningDto = WarningDto.builder()
-                .optimalTemperature(optimalTemperature)
-                .optimalHumidityAir(optimalHumidityAir)
-                .optimalHumidityGround(optimalHumidityGround)
-                .optimalLight(optimalLight)
-                .optimalCarbonDioxide(optimalCarbonDioxide)
-                .build();
+
+        // Check if any sensor data falls outside optimal range
         if (!optimalTemperature || !optimalHumidityAir || !optimalHumidityGround || !optimalLight || !optimalCarbonDioxide) {
-            if(host.isPresent()){
-                notificationService.sendNotification(host.get().getDeviceId(),warningDto);
+            // Send notification only if any sensor data falls outside optimal range
+            if (host.isPresent()) {
+                WarningDto warningDto = WarningDto.builder()
+                        .optimalTemperature(optimalTemperature)
+                        .optimalHumidityAir(optimalHumidityAir)
+                        .optimalHumidityGround(optimalHumidityGround)
+                        .optimalLight(optimalLight)
+                        .optimalCarbonDioxide(optimalCarbonDioxide)
+                        .build();
+
+                // Retrieve notifications for the Arduino
+                Optional<Notifications> notificationsOptional = notificationsEntityService.findByArduinoId(arduino.getId());
+                if (notificationsOptional.isPresent()) {
+                    Notifications notifications = notificationsOptional.get();
+
+                    // Compare the warning with the notifications
+                    if (!compare(warningDto, notifications)) {
+                        // Update notifications with warning values
+                        notifications.setOptimalCarbonDioxide(warningDto.getOptimalCarbonDioxide());
+                        notifications.setOptimalLight(warningDto.getOptimalLight());
+                        notifications.setOptimalHumidityAir(warningDto.getOptimalHumidityAir());
+                        notifications.setOptimalHumidityGround(warningDto.getOptimalHumidityGround());
+                        notifications.setOptimalTemperature(warningDto.getOptimalTemperature());
+                        notificationsEntityService.save(notifications);
+                        // Send notification
+                        notificationService.sendNotification(host.get().getDeviceId(), warningDto, arduino);
+                    }
+                } else {
+                    // If no notifications found, create new ones with warning values
+                    Notifications newEntity = Notifications.builder()
+                            .optimalCarbonDioxide(warningDto.getOptimalCarbonDioxide())
+                            .optimalLight(warningDto.getOptimalLight())
+                            .optimalHumidityAir(warningDto.getOptimalHumidityAir())
+                            .optimalHumidityGround(warningDto.getOptimalHumidityGround())
+                            .optimalTemperature(warningDto.getOptimalTemperature())
+                            .arduino(arduino)
+                            .build();
+                    notificationsEntityService.save(newEntity);
+                    // Send notification
+                    notificationService.sendNotification(host.get().getDeviceId(), warningDto, arduino);
+                }
+                return warningDto;
             }
         }
-
-        return warningDto;
+        // If all sensor data are within optimal range, return default warning
+        return WarningDto.builder()
+                .optimalTemperature(true)
+                .optimalHumidityAir(true)
+                .optimalHumidityGround(true)
+                .optimalLight(true)
+                .optimalCarbonDioxide(true)
+                .build();
     }
+
+
+
+
+
+    private boolean compare(WarningDto warning, Notifications notification) {
+        return warning.getOptimalLight() == notification.getOptimalLight() &&
+                warning.getOptimalCarbonDioxide() == notification.getOptimalCarbonDioxide() &&
+                warning.getOptimalHumidityAir() == notification.getOptimalHumidityAir() &&
+                warning.getOptimalHumidityGround() == notification.getOptimalHumidityGround() &&
+                warning.getOptimalTemperature() == notification.getOptimalTemperature();
+    }
+
 }

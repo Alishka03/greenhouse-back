@@ -22,7 +22,7 @@ public class WarningDto {
         if (optimalHumidityAir != null && !optimalHumidityAir) {
             warningMessage.append(" humidity air,");
         }
-        if (optimalHumidityAir != null && !optimalHumidityAir) {
+        if (optimalHumidityGround != null && !optimalHumidityGround) {
             warningMessage.append(" humidity ground,");
         }
         if (optimalLight != null && !optimalLight) {

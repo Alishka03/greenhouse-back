@@ -31,4 +31,7 @@ public class Arduino implements Serializable {
     @ManyToOne
     @JoinColumn(name = "plant_id")
     private Plant plant;
+
+    @OneToOne(mappedBy = "arduino", cascade = CascadeType.ALL)
+    private Notifications notifications;
 }
