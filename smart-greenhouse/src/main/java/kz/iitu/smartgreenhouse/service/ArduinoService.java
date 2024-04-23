@@ -20,7 +20,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -62,21 +64,27 @@ public class ArduinoService {
                 .map(arduinoRepository::save);
     }
 
-    public PageResponse<Arduino> findAllPageable(ArduinoCriteria arduinoCriteria) {
-        PageResponse<Arduino> response = new PageResponse<>();
+    public PageResponse<ArduinoDto> findAllPageable(ArduinoCriteria arduinoCriteria) {
+        PageResponse<ArduinoDto> response = new PageResponse<>();
         Page<Arduino> arduinoPage = arduinoRepository.findAll(
                 PageRequest.of(
                         arduinoCriteria.getPage() > 0 ? arduinoCriteria.getPage() - 1 : 0,
                         arduinoCriteria.getSize()
                 )
         );
+
+        List<ArduinoDto> arduinoDTOs = arduinoPage.getContent().stream()
+                .map(arduinoMapper::toDto)
+                .collect(Collectors.toList());
+
         response.setTotalCount(arduinoPage.getTotalElements());
         response.setTotalPages(arduinoPage.getTotalPages());
-        response.setItems(arduinoPage.getContent());
+        response.setItems(arduinoDTOs);
+
         return response;
     }
-    public Optional<Arduino> findById(Long id) {
-        return arduinoRepository.findById(id);
+    public Optional<ArduinoDto> findById(Long id) {
+        return arduinoRepository.findById(id).map(arduinoMapper::toDto);
     }
 
 

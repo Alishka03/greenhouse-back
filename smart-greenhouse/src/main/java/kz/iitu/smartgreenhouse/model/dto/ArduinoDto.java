@@ -3,6 +3,7 @@ package kz.iitu.smartgreenhouse.model.dto;
 import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import kz.iitu.smartgreenhouse.model.Notifications;
 import kz.iitu.smartgreenhouse.model.Plant;
 
 
@@ -20,6 +21,8 @@ public class ArduinoDto {
     private Float carbonDioxide;
 
     private PlantDto plant;
+
+    private Notifications notifications;
 
 
     public ArduinoDto() {
@@ -79,5 +82,13 @@ public class ArduinoDto {
 
     public void setPlant(PlantDto plant) {
         this.plant = plant;
+    }
+
+    public Notifications getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(Notifications notifications) {
+        this.notifications = notifications;
     }
 }
