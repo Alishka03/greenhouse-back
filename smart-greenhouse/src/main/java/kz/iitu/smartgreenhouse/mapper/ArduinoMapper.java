@@ -24,5 +24,6 @@ public interface ArduinoMapper extends EntityMapper<ArduinoDto, Arduino> {
     @Mapping(target = "carbonDioxide" ,source = "carbonDioxide")
     @Mapping(target = "light" ,source = "light")
     @Mapping(target = "plant" ,source = "plant")
+    @Mapping(target = "notifications" ,source = "notifications",ignore = true)
     ArduinoDto base(Arduino arduino);
 }
