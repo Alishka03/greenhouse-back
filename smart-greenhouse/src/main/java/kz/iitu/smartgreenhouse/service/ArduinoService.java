@@ -48,20 +48,21 @@ public class ArduinoService {
         this.notificationsEntityService = notificationsEntityService;
     }
 
-    public Arduino save(ArduinoDto arduinoDto) {
+    public ArduinoDto save(ArduinoDto arduinoDto) {
         Arduino arduino = arduinoMapper.toEntity(arduinoDto);
         arduino = arduinoRepository.save(arduino);
-        return arduino;
+        return arduinoMapper.toDto(arduino);
     }
 
-    public Optional<Arduino> partialUpdate(ArduinoDto arduinoDto) {
+    public Optional<ArduinoDto> partialUpdate(ArduinoDto arduinoDto) {
         return arduinoRepository
                 .findById(arduinoDto.getId())
                 .map(existingArduino -> {
                     arduinoMapper.partialUpdate(existingArduino, arduinoDto);
                     return existingArduino;
                 })
-                .map(arduinoRepository::save);
+                .map(arduinoRepository::save)
+                .map(arduinoMapper::toDto);
     }
 
     public PageResponse<ArduinoDto> findAllPageable(ArduinoCriteria arduinoCriteria) {

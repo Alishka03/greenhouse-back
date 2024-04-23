@@ -27,14 +27,14 @@ public class ArduinoController extends BaseController {
     }
 
     @PostMapping
-    public ResponseEntity<Arduino> createArduino(@RequestBody ArduinoDto arduinoDto) {
-        Arduino createdArduino = arduinoService.save(arduinoDto);
+    public ResponseEntity<ArduinoDto> createArduino(@RequestBody ArduinoDto arduinoDto) {
+        ArduinoDto createdArduino = arduinoService.save(arduinoDto);
         return new ResponseEntity<>(createdArduino, HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<Arduino> partialUpdateArduino(@RequestBody ArduinoDto arduinoDto) {
-        Optional<Arduino> updatedArduino = arduinoService.partialUpdate(arduinoDto);
+    public ResponseEntity<ArduinoDto> partialUpdateArduino(@RequestBody ArduinoDto arduinoDto) {
+        Optional<ArduinoDto> updatedArduino = arduinoService.partialUpdate(arduinoDto);
         return updatedArduino.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
