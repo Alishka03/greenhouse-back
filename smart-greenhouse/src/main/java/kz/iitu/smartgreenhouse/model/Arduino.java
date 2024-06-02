@@ -14,11 +14,14 @@ import java.io.Serializable;
 @Builder
 public class Arduino implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Float temperature;
 
-    private Float humidity;
+    private Float humidityAir;
+
+    private Float humidityGround;
 
     private Float light;
 
@@ -28,4 +31,7 @@ public class Arduino implements Serializable {
     @ManyToOne
     @JoinColumn(name = "plant_id")
     private Plant plant;
+
+    @OneToOne(mappedBy = "arduino", cascade = CascadeType.ALL)
+    private Notifications notifications;
 }

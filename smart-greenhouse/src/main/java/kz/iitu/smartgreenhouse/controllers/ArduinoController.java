@@ -27,27 +27,27 @@ public class ArduinoController extends BaseController {
     }
 
     @PostMapping
-    public ResponseEntity<Arduino> createArduino(@RequestBody ArduinoDto arduinoDto) {
-        Arduino createdArduino = arduinoService.save(arduinoDto);
+    public ResponseEntity<ArduinoDto> createArduino(@RequestBody ArduinoDto arduinoDto) {
+        ArduinoDto createdArduino = arduinoService.save(arduinoDto);
         return new ResponseEntity<>(createdArduino, HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<Arduino> partialUpdateArduino(@RequestBody ArduinoDto arduinoDto) {
-        Optional<Arduino> updatedArduino = arduinoService.partialUpdate(arduinoDto);
+    public ResponseEntity<ArduinoDto> partialUpdateArduino(@RequestBody ArduinoDto arduinoDto) {
+        Optional<ArduinoDto> updatedArduino = arduinoService.partialUpdate(arduinoDto);
         return updatedArduino.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping
-    public ResponseEntity<PageResponse<Arduino>> getAllArduinos(ArduinoCriteria arduinoCriteria
+    public ResponseEntity<PageResponse<ArduinoDto>> getAllArduinos(ArduinoCriteria arduinoCriteria
     ) {
-        PageResponse<Arduino> arduinoPage = arduinoService.findAllPageable(arduinoCriteria);
+        PageResponse<ArduinoDto> arduinoPage = arduinoService.findAllPageable(arduinoCriteria);
         return ResponseEntity.ok(arduinoPage);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Arduino> getArduinoById(@PathVariable Long id) {
-        Optional<Arduino> arduino = arduinoService.findById(id);
+    public ResponseEntity<ArduinoDto> getArduinoById(@PathVariable Long id) {
+        Optional<ArduinoDto> arduino = arduinoService.findById(id);
         return arduino.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 

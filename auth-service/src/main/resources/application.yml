@@ -6,9 +6,11 @@ spring:
     name: auth-service
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/greenhouse
+    url: jdbc:postgresql://34.125.1.104:5432/greenhouse
     username: postgres
     password: postgres
+    hikari:
+      max-lifetime: 1800000
     jpa:
       hibernate:
         ddl-auto: none
@@ -23,7 +25,7 @@ spring:
     host: smtp.gmail.com
     port: 587
     username: greenhousedevteam@gmail.com
-    password: #PASSWORD
+    password: fnrzyefeplvlumjh
     protocol: smtp
     from: greenhousedevteam@gmail.com
     properties.mail.smtp:
@@ -34,4 +36,4 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8767/eureka/
+      defaultZone: http://34.125.138.217:8767/eureka/

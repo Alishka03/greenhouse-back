@@ -9,25 +9,27 @@ spring:
     driver-class-name: org.postgresql.Driver
     username: postgres
     password: postgres
-    url: jdbc:postgresql://localhost:5432/greenhouse
+    url: jdbc:postgresql://34.125.1.104:5432/greenhouse
+    hikari:
+      max-lifetime: 1800000
   cloud:
     gateway:
       routes:
         - id: auth-service
-          uri: http://localhost:9898
+          uri: http://34.125.138.217:9898
           predicates:
             - Path=/gateway/auth/**
           filters:
             - StripPrefix=1
         - id: smart-greenhouse
-          uri: http://localhost:8082
+          uri: http://34.125.138.217:8082
           predicates:
             - Path=/gateway/smart-greenhouse/**
           filters:
             - AuthenticationFilter
             - StripPrefix=1
         - id: file-store
-          uri: http://localhost:8890
+          uri: http://34.125.138.217:8890
           predicates:
             - Path=/gateway/file-store/**
           filters:
@@ -37,4 +39,4 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8767/eureka/
+      defaultZone: http://34.125.138.217:8767/eureka/

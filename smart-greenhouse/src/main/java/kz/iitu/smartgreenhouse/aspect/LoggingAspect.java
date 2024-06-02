@@ -25,7 +25,6 @@ import java.util.Map;
 public class LoggingAspect {
     private final ObjectMapper mapper;
 
-
     @Around("kz.iitu.smartgreenhouse.aspect.AopExpressions.pointcutLogging()")
     public Object logTestEndpoint(ProceedingJoinPoint joinPoint) {
         LoggerELK loggerELK = new LoggerELK();
@@ -40,18 +39,23 @@ public class LoggingAspect {
             if (joinPoint.getSignature().getName().equals("insertData")) {
                 ArduinoData temp = (ArduinoData) parameters.get("data");
                 loggerELK.setArduinoId(temp.getId());
-                loggerELK.setHumidity(temp.getHumidity());
+                loggerELK.setHumidityAir(temp.getHumidityAir());
+                loggerELK.setHumidityGround(temp.getHumidityGround());
                 loggerELK.setCo2(temp.getCo2());
+                loggerELK.setLight(temp.getLight());
                 loggerELK.setTemperature(temp.getTemperature());
             }
             if (joinPoint.getSignature().getName().equals("insertDataTest")){
                 ArduinoData temp = (ArduinoData) parameters.get("data");
                 loggerELK.setArduinoId(temp.getId());
-                loggerELK.setHumidity(temp.getHumidity());
+                loggerELK.setHumidityAir(temp.getHumidityAir());
+                loggerELK.setHumidityGround(temp.getHumidityGround());
                 loggerELK.setCo2(temp.getCo2());
+                loggerELK.setLight(temp.getLight());
                 loggerELK.setTemperature(temp.getTemperature());
             }
             log.debug("{} ", mapper.writeValueAsString(loggerELK));
+            System.out.println("log destinated : " + mapper.writeValueAsString(loggerELK));
             return response;
         } catch (JsonProcessingException e) {
             log.error("Error while converting", e);

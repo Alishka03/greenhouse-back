@@ -121,10 +121,17 @@ public class GreenhouseService {
             Arduino arduino = greenhouse.getArduino();
             Plant plant = arduino.getPlant();
             boolean optimalTemperature = isWithinRange(arduino.getTemperature(), plant.getMinimumTemperature(), plant.getMaximumTemperature());
-            boolean optimalHumidity = isWithinRange(arduino.getHumidity(), plant.getMinimumHumidity(), plant.getMaximumHumidity());
+            boolean optimalHumidityAir = isWithinRange(arduino.getHumidityAir(), plant.getMinimumHumidityAir(), plant.getMaximumHumidityAir());
+            boolean optimalHumidityGround = isWithinRange(arduino.getHumidityGround(), plant.getMinimumHumidityGround(), plant.getMaximumHumidityGround());
             boolean optimalLight = isWithinRange(arduino.getLight(), plant.getMinimumLight(), plant.getMaximumLight());
             boolean optimalCarbonDioxide = isWithinRange(arduino.getCarbonDioxide(), plant.getMinimumCarbonDioxide(), plant.getMaximumCarbonDioxide());
-            WarningDto warningDto = new WarningDto(optimalTemperature, optimalHumidity, optimalLight, optimalCarbonDioxide);
+            WarningDto warningDto = WarningDto.builder()
+                    .optimalTemperature(optimalTemperature)
+                    .optimalHumidityAir(optimalHumidityAir)
+                    .optimalHumidityGround(optimalHumidityGround)
+                    .optimalLight(optimalLight)
+                    .optimalCarbonDioxide(optimalCarbonDioxide)
+                    .build();
             GreenhouseResponseDto greenhouseResponseDto = new GreenhouseResponseDto(mapper.toDto(greenhouse),warningDto);
             response.add(greenhouseResponseDto);
         });
@@ -137,7 +144,4 @@ public class GreenhouseService {
     private boolean isWithinRange(Float value, Float min, Float max) {
         return value != null && value >= min && value <= max;
     }
-
-
-
 }

@@ -27,4 +27,7 @@
     <changeSet author="Alisher" id="9">
         <sqlFile path="classpath:/db/sql/09.04.2024_add_device_id.sql" relativeToChangelogFile="false" splitStatements="true"/>
     </changeSet>
+    <changeSet author="Alisher" id="10">
+        <sqlFile path="classpath:/db/sql/18.04.2024_create_table_notifications.sql" relativeToChangelogFile="false" splitStatements="true"/>
+    </changeSet>
 </databaseChangeLog>
