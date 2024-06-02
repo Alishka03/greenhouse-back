@@ -9,7 +9,9 @@ spring:
     driver-class-name: org.postgresql.Driver
     username: postgres
     password: postgres
-    url: jdbc:postgresql://localhost:5432/greenhouse
+    url: jdbc:postgresql://34.125.1.104:5432/greenhouse
+    hikari:
+      max-lifetime: 1800000
   jpa:
     show-sql: true
     properties:
@@ -28,7 +30,7 @@ jwt:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8767/eureka/
+      defaultZone: http://34.125.138.217:8767/eureka/
 
 firebase:
   key: AAAAeqkAQBU:APA91bEUJ5BcaMOsMeyRz9cl1q6jzfwxQVCzhWyyWVFuW-2uneFBvGBVphAtLMfL1jcCtc8OgxLSznSeE8trNvCetHSRw2gnzgJYV86kEgSxwtQsC0FH5wAOKkXC5DqelvXqXmbUYa6n

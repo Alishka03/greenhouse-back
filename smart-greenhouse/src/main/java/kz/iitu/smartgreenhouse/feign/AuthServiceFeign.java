@@ -5,7 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 
-@FeignClient(name = "auth-service", url = "http://localhost:9898") // Replace with the actual URL of your auth service
+@FeignClient(name = "auth-service", url = "http://34.125.138.217:9898") // Replace with the actual URL of your auth service
 public interface AuthServiceFeign {
 
     @GetMapping("/auth/get-current-user")

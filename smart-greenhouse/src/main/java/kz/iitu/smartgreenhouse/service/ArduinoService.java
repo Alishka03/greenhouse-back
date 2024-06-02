@@ -19,8 +19,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -94,6 +96,8 @@ public class ArduinoService {
         arduinoRepository.deleteById(id);
     }
 
+
+    @Transactional
     public InsertResponseDto insertingData(ArduinoData data) {
         Optional<Arduino> optionalArduino = arduinoRepository.findById(data.getId());
         if (optionalArduino.isEmpty()) {
@@ -139,6 +143,7 @@ public class ArduinoService {
     }
 
 
+    @Transactional
     public WarningDto insertDataTest(ArduinoData data) {
         Optional<Arduino> optionalArduino = arduinoRepository.findById(data.getId());
         if (optionalArduino.isEmpty()) {
@@ -152,8 +157,6 @@ public class ArduinoService {
         boolean optimalHumidityGround = isWithinRange(data.getHumidityGround(), currentPlant.getMinimumHumidityGround(), currentPlant.getMaximumHumidityGround());
         boolean optimalLight = isWithinRange(data.getLight(), currentPlant.getMinimumLight(), currentPlant.getMaximumLight());
         boolean optimalCarbonDioxide = isWithinRange(data.getCo2(), currentPlant.getMinimumCarbonDioxide(), currentPlant.getMaximumCarbonDioxide());
-
-        // Update arduino with new sensor data
         if (data.getCo2() != null) {
             arduino.setCarbonDioxide(data.getCo2());
         }
@@ -170,10 +173,7 @@ public class ArduinoService {
             arduino.setHumidityGround(data.getHumidityGround());
         }
         arduinoRepository.save(arduino);
-
-        // Check if any sensor data falls outside optimal range
         if (!optimalTemperature || !optimalHumidityAir || !optimalHumidityGround || !optimalLight || !optimalCarbonDioxide) {
-            // Send notification only if any sensor data falls outside optimal range
             if (host.isPresent()) {
                 WarningDto warningDto = WarningDto.builder()
                         .optimalTemperature(optimalTemperature)
@@ -197,6 +197,7 @@ public class ArduinoService {
                         notifications.setOptimalHumidityGround(warningDto.getOptimalHumidityGround());
                         notifications.setOptimalTemperature(warningDto.getOptimalTemperature());
                         notificationsEntityService.save(notifications);
+                        log.info("NOTIFICATIONS: ",notifications.toString());
                         // Send notification
                         notificationService.sendNotification(host.get().getDeviceId(), warningDto, arduino);
                     }
@@ -210,6 +211,7 @@ public class ArduinoService {
                             .optimalTemperature(warningDto.getOptimalTemperature())
                             .arduino(arduino)
                             .build();
+                    log.info("NOTIFICATIONS: ",newEntity.toString());
                     notificationsEntityService.save(newEntity);
                     // Send notification
                     notificationService.sendNotification(host.get().getDeviceId(), warningDto, arduino);
@@ -227,16 +229,13 @@ public class ArduinoService {
                 .build();
     }
 
-
-
-
-
     private boolean compare(WarningDto warning, Notifications notification) {
-        return warning.getOptimalLight() == notification.getOptimalLight() &&
-                warning.getOptimalCarbonDioxide() == notification.getOptimalCarbonDioxide() &&
-                warning.getOptimalHumidityAir() == notification.getOptimalHumidityAir() &&
-                warning.getOptimalHumidityGround() == notification.getOptimalHumidityGround() &&
-                warning.getOptimalTemperature() == notification.getOptimalTemperature();
+        return Objects.equals(warning.getOptimalLight(), notification.getOptimalLight()) &&
+                Objects.equals(warning.getOptimalCarbonDioxide(), notification.getOptimalCarbonDioxide()) &&
+                Objects.equals(warning.getOptimalHumidityAir(), notification.getOptimalHumidityAir()) &&
+                Objects.equals(warning.getOptimalHumidityGround(), notification.getOptimalHumidityGround()) &&
+                Objects.equals(warning.getOptimalTemperature(), notification.getOptimalTemperature());
     }
+
 
 }

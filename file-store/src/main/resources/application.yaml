@@ -7,8 +7,12 @@ spring:
     name: file-storage
   data:
     mongodb:
-      uri: mongodb+srv://alisheraytbay:alisheraytbay@cluster0.a4fkt4u.mongodb.net/?retryWrites=true&w=majority
-      database: greenhouse
+      host: 34.125.251.28
+      port: 9876
+      database: mydatabase
+      authentication-database: mydatabase
+      username: myuser
+      password: mypassword
   servlet:
     multipart:
       enabled: true
@@ -19,4 +23,4 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8767/eureka/
+      defaultZone: http://34.125.138.217:8767/eureka/

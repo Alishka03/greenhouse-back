@@ -28,4 +28,15 @@ public class Notifications {
     @JoinColumn(name = "arduino_id")
     private Arduino arduino;
 
+    @Override
+    public String toString() {
+        return "Notifications{" +
+                "id=" + id +
+                ", optimalTemperature=" + optimalTemperature +
+                ", optimalHumidityAir=" + optimalHumidityAir +
+                ", optimalHumidityGround=" + optimalHumidityGround +
+                ", optimalLight=" + optimalLight +
+                ", optimalCarbonDioxide=" + optimalCarbonDioxide +
+                '}';
+    }
 }

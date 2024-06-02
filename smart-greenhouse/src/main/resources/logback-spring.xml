@@ -4,7 +4,7 @@
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
     <appender name="stash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination>localhost:5000</destination>
+        <destination>34.125.1.104:5000</destination>
         <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
             <providers>
                 <mdc/> <!-- MDC variables on the Thread will be written as JSON fields-->

@@ -55,6 +55,7 @@ public class LoggingAspect {
                 loggerELK.setTemperature(temp.getTemperature());
             }
             log.debug("{} ", mapper.writeValueAsString(loggerELK));
+            System.out.println("log destinated : " + mapper.writeValueAsString(loggerELK));
             return response;
         } catch (JsonProcessingException e) {
             log.error("Error while converting", e);
